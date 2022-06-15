@@ -1,0 +1,49 @@
+:root{
+    --kube-blockquote-border:rgba(21, 141, 247, .6);
+    --kube-label-color: rgba(17, 17, 19, .85);
+    --kube-label-color-secondary: rgba(17, 17, 19, .2);
+    --kube-body-color: #111113;
+    --kube-muted-color: rgba(17, 17, 19, .5);
+    --kube-muted-border-color:rgba(17, 17, 19, .1);
+    --kube-table-border-color:#eee;
+    --kube-theme-color:#0c3dd7;
+
+    --default-main-bg:#fff;
+    --default-panel-bg:#fff;
+
+    --sidebar-bg:#333;
+    --sidebar-bg-hov:#222;
+    --sidebar-bg-act:#111;
+    --sidebar-txt:#efefef;
+
+    --divider:#676767;
+
+    --main-bg:var(--default-main-bg);
+    --panel-bg:var(--default-panel-bg);
+
+    --theme-color:var(--kube-theme-color);
+
+    --blockquote-border:var(--kube-blockquote-border);
+    --label-color:var(--kube-label-color);
+    --label-color-secondary:var(--kube-label-color-secondary);
+    --body-color:var(--kube-body-color);
+    --muted-color:var(--kube-muted-color);
+    --muted-border-color:var(--kube-muted-border-color);
+    --button-accent-color:var(--theme-color);
+
+    --table-border-color:var(--kube-table-border-color);
+
+    --header-height:40px;
+
+    /*custom theme*/
+    /*
+    --main-bg:#111;
+    --panel-bg:#333;
+    --body-color:#fefefe;
+    --muted-color:rgb(230,230,230, .6);
+    --muted-border-color:rgb(230,230,230, .2);
+
+    --table-border-color:rgb(113, 113, 113);
+    --button-accent-color:#658aff;
+    */
+}

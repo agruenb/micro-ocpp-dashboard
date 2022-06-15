@@ -1,0 +1,13 @@
+.interact{
+    user-select: none;
+    cursor: pointer;
+}
+.divider{
+    width:90%;
+    margin: 10px auto;
+    height:1.5px;
+    background:var(--divider);
+}
+.button.is-tertiary svg{
+    margin-right:10px;
+}

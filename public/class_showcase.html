@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a responsive email layout.">
+    <title>Kube</title>
+    <link rel="stylesheet" href="css/kube.css">
+    <link rel="stylesheet" href="css/vars.css">
+</head>
+<body>
+    <main style="padding:26px">
+        <div class="is-row is-stack-20">
+            <nav class="breadcrumb">
+                <a href="">Home</a>
+                <a>Menu</a>
+                <span>Page</span>
+            </nav>
+        </div>
+        <h1>Kube design Test Page</h1>
+        <h3>Sub-heading</h3>
+        <div class="is-row is-stack-20">
+            <div class="alert is-col">This is an alert!</div>
+        </div>
+        <div class="is-col is-stack-20">
+            <button class="button">Button</button>
+            <a href="#" class="button">Button</a>
+            <button class="button is-secondary">Button</button>
+            <a href="#" class="button is-secondary">Button</a>
+            <button class="button is-tertiary">Button</button>
+            <a href="#" class="button is-tertiary">Button</a>
+            <button class="button is-small">Button</button>
+            <button class="button is-secondary is-small">Button</button>
+            <button class="button is-tertiary is-small">Button</button>
+            <button class="button is-big">Button</button>
+            <button class="button is-secondary is-big">Button</button>
+            <button class="button is-tertiary is-big">Button</button>
+            <button class="button is-loading"></button>
+            <button class="button is-loading">Loading</button>
+            <button class="button is-secondary is-loading">Loading</button>
+            <button class="button is-tertiary is-loading">Loading</button>
+        </div>
+        <div class="is-row is-stack-20">
+            <form class="is-col" method="post" action="">
+    
+                <div class="form-item">
+                    <label>Name</label>
+                    <input type="text" name="name" class="w50">
+                </div>
+            
+                <div class="form-item">
+                    <label>Country</label>
+                    <select>
+                        <option value="">Germany</option>
+                        <option value="">Schweiz</option>
+                    </select>
+                </div>
+            
+                <div class="form-item">
+                    <label class="is-checkbox"><input type="checkbox"> Check me</label>
+                    <label class="is-checkbox"><input type="radio"> Radio me</label>
+                </div>
+            
+                <div class="form-item">
+                    <textarea rows="6"></textarea>
+                </div>
+            
+                <div class="form-item is-buttons">
+                    <button class="button">Log in</button>
+                    <button class="button is-tertiary">Cancel</button>
+                </div>
+            
+            </form>
+        </div>
+        <div class="is-row is-stack-20">
+            <form class="is-col">
+                <div class="is-row">
+                    <div class="form-item is-col">
+                        <label>City <span class="is-req">*</span></label>
+                        <input type="text">
+                    </div>
+                    <div class="form-item is-col">
+                        <label>City <span class="is-desc">This is the City</span></label>
+                        <input type="text">
+                        <div class="is-desc">Of rock and roll</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <form class="is-row is-stack-20">
+            <fieldset class="is-col">
+                <legend>Login data</legend>
+                <div class="form-item">
+                    <label>Name</label>
+                    <input type="text" name="name" class="is-50">
+                </div>
+                <div class="form-item">
+                    <label>Phone</label>
+                    <input type="phone" name="phone" class="is-50">
+                </div>
+            </fieldset>
+            <fieldset class="is-col">
+                <legend>Alerts</legend>
+                <form method="post" action="">
+                    <div class="form-item">
+                        <label>Your height <span class="is-success">...</span></label>
+                        <input type="text" class="is-success">
+                    </div>
+                </form>
+                <form method="post" action="">
+                    <div class="form-item">
+                        <label>Enter your weight <span class="is-error">...</span></label>
+                        <input type="text" class="is-error">
+                    </div>
+                </form>
+            </fieldset>
+        </form>
+        <div class="is-row is-stack-20">
+            <form class="is-col" method="post" action="">
+                <div class="form-item">
+                    <label>How much is it?</label>
+                    <div class="is-prepend is-50">
+                        <span>$</span>
+                        <input type="text">
+                    </div>
+                </div>
+            </form>
+            <form class="is-col" method="post" action="">
+                <div class="form-item">
+                    <label>It is much how?</label>
+                    <div class="is-append">
+                        <input type="text">
+                        <span>€</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="is-row is-stack-20">
+            <span class="label">Draft</span>
+            <span class="label is-error">Rejected</span>
+            <span class="label is-focus">Status</span>
+            <span class="label is-success">Approved</span>
+            <span class="label is-warning">Pending</span>
+            <span class="label is-badge">2</span>
+            <span class="label is-badge is-error">2</span>
+            <span class="label is-badge is-focus">2</span>
+            <span class="label is-badge is-success">2</span>
+            <span class="label is-badge is-warning">2</span>
+        </div>
+        <div class="is-row is-stack-20">
+            <nav class="pager is-col">
+                <a href="#" class="is-prev"></a>
+                <a href="#">1</a>
+                <a href="#" class="is-active">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#" class="is-next"></a>
+            </nav>
+            <table class="is-col">
+                <thead>
+                    <tr>
+                        <th>Header</th>
+                        <th>Header</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                    </tr>
+                    <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Footer</td>
+                        <td>Footer</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="is-row is-stack-20">
+            <nav class="tabs" data-kube="tabs" data-equal="true">
+                <a href="#tab1" class="is-active">Page 1</a>
+                <a href="#tab2">Page 2</a>
+                <a href="#tab3">Page 3</a>
+            </nav>
+        </div>
+        <div class="is-row is-stack-20">
+            <blockquote>
+                "asset main.eeb03a98e8c037aa4781.hot-update.js 14.5 KiB [emitted] [immutable] [hmr] (name: main) asset main.eeb03a98e8c037aa4781.hot-update.json 28 bytes [emitted] [immutable] [hmr] Entrypoint main 699 KiB = main.js 685 KiB main.eeb03a98e8c037aa4781.hot-update.js 14.5 KiB"
+            </blockquote>
+        </div>
+        .message
+        .close
+    </main>
+</body>
+</html>
