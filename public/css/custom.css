@@ -1,3 +1,6 @@
+:root{
+    accent-color: var(--kube-theme-color);
+}
 .interact{
     user-select: none;
     cursor: pointer;
@@ -8,6 +11,29 @@
     height:1.5px;
     background:var(--divider);
 }
-.button.is-tertiary svg{
+.button .pad-icon svg{
     margin-right:10px;
+}
+td svg{
+    margin-right:10px;
+    vertical-align: bottom;
+}
+.label svg{
+    vertical-align: text-top;
+}
+.align-center{
+    display:flex;
+    align-items: center;
+}
+.all-center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.label.is-success.is-large{
+    font-size: 1.2rem;
+    line-height: 37px;
+}
+.v-align-mid{
+    vertical-align: middle;
 }

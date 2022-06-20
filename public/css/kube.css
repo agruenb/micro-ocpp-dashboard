@@ -99,8 +99,7 @@ button {
 [type=checkbox] {
     vertical-align: middle;
     position: relative;
-    bottom: .15rem;
-    margin-right: 2px
+    margin-right: 5px
 }
 
 input[type=search] {
@@ -920,7 +919,7 @@ form {
     display: inline-block;
     vertical-align: baseline;
     line-height: 20px;
-    background: #f3f3f3;
+    background: var(--transparent-gray);
     color: var(--label-color);
     padding: 0 8px;
     border: 1px solid transparent;
@@ -1015,7 +1014,7 @@ a.label {
 }
 
 .label.is-success {
-    background-color: rgba(32, 188, 113, .07);
+    background-color: var(--transparent-green);
     color: #20bc71
 }
 
@@ -1409,7 +1408,7 @@ textarea.is-error:focus {
 input.is-success,
 select.is-success,
 textarea.is-success {
-    background-color: rgba(32, 188, 113, .05);
+    background-color: var(--transparent-green);
     border: 1px solid rgba(32, 188, 113, .5);
     box-shadow: none inset
 }
@@ -1526,12 +1525,6 @@ form div.is-warning,
 form span.is-warning {
     font-size: .75em;
     color: #ff6951
-}
-
-form span.is-error,
-form span.is-success,
-form span.is-warning {
-    margin-left: 2px
 }
 
 form .is-desc {
@@ -1963,7 +1956,7 @@ fieldset>.form-item:last-child {
 }
 
 .alert.is-success {
-    background: rgba(32, 188, 113, .07);
+    background: var(--transparent-green);
     border-color: rgba(32, 188, 113, .3);
     color: #20bc71
 }

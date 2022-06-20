@@ -2,11 +2,12 @@ import { h, Component, createContext  } from "preact";
 
 
 import Sidebar from "./Layout.Sidebar.js";
-import Overview from "./Path.Overview.js";
 import Network from "./Path.Network.js";
 import Security from "./Path.Security.js";
 import Ocpp from "./Path.Ocpp.js";
 import Header from "./Layout.Header.js";
+import DeviceInfo from "./Path.DeviceInfo.js";
+import OtherDevices from "./Path.OtherDevices.js";
 
 
 const Path = createContext()
@@ -16,7 +17,7 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            path : "overview"
+            path : "network"
         }
     }
     navigation(){
@@ -40,16 +41,11 @@ export default class App extends Component {
     }
 
     closeSidebarMobile(){
-        console.log("done");
         document.querySelector(".sidebar").classList.remove("show-mobile");
     }
 
     view(path){
         switch(path){
-            case "overview":
-                return (
-                    <Overview nav={this.navigation()} />
-                )
             case "network":
                 return (
                     <Network nav={this.navigation()} />
@@ -61,6 +57,14 @@ export default class App extends Component {
             case "ocpp":
                 return (
                     <Ocpp nav={this.navigation()} />
+                )
+            case "about":
+                return (
+                    <DeviceInfo nav={this.navigation()} />
+                )
+            case "other":
+                return (
+                    <OtherDevices nav={this.navigation()} />
                 )
         }  
     }

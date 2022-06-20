@@ -33,17 +33,8 @@
 
     --table-border-color:var(--kube-table-border-color);
 
+    --transparent-green:rgba(32, 188, 113, .1);
+    --transparent-gray: rgba(0, 0, 0, 0.07);
+
     --header-height:40px;
-
-    /*custom theme*/
-    /*
-    --main-bg:#111;
-    --panel-bg:#333;
-    --body-color:#fefefe;
-    --muted-color:rgb(230,230,230, .6);
-    --muted-border-color:rgb(230,230,230, .2);
-
-    --table-border-color:rgb(113, 113, 113);
-    --button-accent-color:#658aff;
-    */
 }
