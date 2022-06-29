@@ -1,6 +1,6 @@
-import { API_ROOT } from "constants"
+import { API_ROOT } from "./constants"
 
-class DataService {
+class DataServiceClass {
     constructor(){
         this.apiRoot = API_ROOT;
     }
@@ -18,3 +18,7 @@ class DataService {
         return response.json()
     }
 }
+
+const DataService = new DataServiceClass();
+
+export default DataService;

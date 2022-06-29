@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
+const Dotenv = require('dotenv-webpack');
 
 const prodConfig = {
     mode: "production",

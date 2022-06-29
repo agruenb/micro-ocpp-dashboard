@@ -1,4 +1,5 @@
 import { h } from "preact";
+import SetBackendUrl from "./Gui.SetBackendUrl";
 import FullPage from "./Layout.FullPage";
 
 import ButtonGroup from "./Util.ButtonGroup";
@@ -39,17 +40,7 @@ export default function Ocpp() {
         <FullPage>
             <h2 class="is-stack-40">Ocpp 1.6</h2>
             <form class="is-stack-40 is-col">
-                <fieldset class="is-col">
-                    <legend>Backend</legend>
-                    <div class="form-item is-col">
-                        <label>
-                            Backend URL
-                            <span class="is-desc">The URL of the backend server</span>
-                        </label>
-                        <textarea rows="4" value="https://localhost:3000/index_dev.html"></textarea>
-                    </div>
-                    <button class="button" type="button">Save</button>
-                </fieldset>
+                <SetBackendUrl />
             </form>
             <form class="is-stack-40">
                 <fieldset>
