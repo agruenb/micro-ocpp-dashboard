@@ -21,6 +21,10 @@ td svg{
 .label svg{
     vertical-align: text-top;
 }
+.alert svg{
+    margin-right:16px;
+    vertical-align: top;
+}
 .align-center{
     display:flex;
     align-items: center;

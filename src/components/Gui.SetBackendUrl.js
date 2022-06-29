@@ -1,6 +1,8 @@
 import { h } from "preact"
 import { useState } from "preact/hooks"
 import DataService from "../DataService"
+import ICheck from "./icons/ICheck";
+import IForbidden from "./icons/IForbidden";
 import InputGroup from "./Layout.InputGroup"
 
 export default function SetBackendUrl(props){
@@ -37,6 +39,7 @@ export default function SetBackendUrl(props){
                 error != ""
                 && 
                 <div class="alert is-error">
+                    <IForbidden size="24" stroke="#ee2455" />
                     {error}
                 </div>
             }
@@ -44,6 +47,7 @@ export default function SetBackendUrl(props){
                 success != ""
                 && 
                 <div class="alert is-success">
+                    <ICheck size="24" stroke="#20bc71" />
                     {success}
                 </div>
             }
