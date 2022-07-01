@@ -1,4 +1,4 @@
-import { API_ROOT } from "./constants"
+import { API_ROOT, NODE_ENV } from "./constants"
 
 class DataServiceClass {
     constructor(){
@@ -14,8 +14,30 @@ class DataServiceClass {
               },
             body:JSON.stringify(body)
         }
-        let response = await fetch(url, options);
-        return response.json()
+        let response;
+        if(NODE_ENV == "development"){
+            //this block is only included in the development build
+            try{
+                response = await fetch(url, options);
+            }catch(error){
+                console.error("The api request could not complete successfully", `URL: ${url}`, body)
+                throw error;
+            }
+            let response_raw, response_json;
+            try{
+                response_raw = await response.text();
+                response_json = JSON.parse(response_raw);
+            }catch(error){
+                console.error("Could not parse api response as JSON", `Response: ${response_raw}`);
+                throw error;
+            }
+            return response_json;
+        }
+        if(NODE_ENV == "production"){
+            //this block is only included in the production build
+            response = await fetch(url, options);
+            return response.json();
+        }
     }
 }
 

@@ -21,6 +21,11 @@ Then you should:
 
 In a short time a development server at http://localhost:3000 should be started.
 
+### API configuration
+
+For development the backend api root is defined in the ".env.development" file. For the production build a file called ".env.production" is used. This file could contain sensible information and is therefore not included in this repository.
+The targeted api endpoints are defined in the "constants.js" file in the "src" folder.
+
 ## Build the project
 
 1. Enter the root directory of the project
