@@ -1,5 +1,7 @@
 const path = require("path");
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const BundleAnalyzerPlugin =
     require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
@@ -40,23 +42,13 @@ module.exports = {
                 use: [{ loader: "file-loader" }],
             },
             {
-                test: /\.scss|\.css|\.less$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    {
-                        loader: "less-loader",
-                        options: {
-                            lessOptions: {
-                                javascriptEnabled: true,
-                            },
-                        },
-                    },
-                ],
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader,"css-loader"],
             },
         ],
     },
     plugins: [
+        new MiniCssExtractPlugin(),
         //new BundleAnalyzerPlugin(),//the bundle analyzer tell the size of each js bundle
     ],
 };

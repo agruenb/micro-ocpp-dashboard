@@ -1,18 +1,18 @@
 .btn-group{
     display:flex;
 }
-.btn-group .button{
+.btn-group button.button{
     border-radius: 0;
     border-left-width: 2px;
     border-right-width: 0;
 
     width:100%;
 }
-.btn-group .button:first-child{
+.btn-group button.button:first-child{
     border-radius: 4px 0 0 4px;
     border-left-width: 2px;
 }
-.btn-group .button:last-child{
+.btn-group button.button:last-child{
     border-radius: 0 4px 4px 0;
     border-right-width: 2px;
 }

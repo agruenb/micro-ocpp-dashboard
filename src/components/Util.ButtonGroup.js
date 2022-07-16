@@ -1,3 +1,5 @@
+import "./component_styles/buttongroup.css";
+
 import { h } from "preact"
 
 export default function ButtonGroup(props) {
