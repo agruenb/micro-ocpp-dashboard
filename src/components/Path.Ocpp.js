@@ -1,5 +1,6 @@
 import { h } from "preact";
 import SetBackendUrl from "./Gui.SetBackendUrl";
+import SetSecondaryUrl from "./Gui.SetSecondaryUrl";
 import FullPage from "./Layout.FullPage";
 
 import ButtonGroup from "./Util.ButtonGroup";
@@ -69,17 +70,7 @@ export default function Ocpp() {
                 </fieldset>
             </form>
             <form class="is-stack-40">
-                <fieldset class="is-col">
-                    <legend>Secondary</legend>
-                    <div class="form-item is-col">
-                        <label>
-                            Secondary URL
-                            <span class="is-desc">The URL of the secondary server</span>
-                        </label>
-                        <textarea rows="4" value="https://localhost:3000/index_dev.html?parameters=none"></textarea>
-                    </div>
-                    <button class="button" type="button">Save</button>
-                </fieldset>
+                <SetSecondaryUrl />
             </form>
             <form>
                 <fieldset>

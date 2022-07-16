@@ -1,41 +1,34 @@
-import { h } from "preact"
-import { useState } from "preact/hooks"
-import DataService from "../DataService"
+import { h } from "preact";
+import { useState } from "preact/hooks";
+
+import InputGroup from "./Layout.InputGroup";
 import ICheck from "./icons/ICheck";
 import IForbidden from "./icons/IForbidden";
-import InputGroup from "./Layout.InputGroup";
 
-import { API_ENDPOINT_BACKEND_URL } from "../constants";
+import DataService from "../DataService";
 
-export default function SetBackendUrl(props){
+export default function SetSecondaryUrl(){
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const [text, setText] = useState("https://localhost:3000/index.html")
+    const [text, setText] = useState("https://localhost:3000/index.html");
 
-    function apiSetBackendUrl(){
-        onRequestStarted();
+    function apiSetSecondaryUrl(){
         let body = {
             "url":text
         };
-        DataService.post(API_ENDPOINT_BACKEND_URL, body)
+        DataService.post("/hello_world.php", body)
         .then(data => {
-            setSuccess("Backend URL updated");
+            setSuccess(data.new_value);
         })
         .catch( error => {
             setError("Failed to update backend URL");
         })
         .finally( () => {
-            setLoading(false);
+            //setLoading(false);
         })
-    }
-
-    function onRequestStarted(){
-        setSuccess("");
-        setError("");
-        setLoading(true);
     }
 
     function updateValue(event){
@@ -43,7 +36,7 @@ export default function SetBackendUrl(props){
     }
 
     return (
-        <InputGroup name="Backend">
+        <InputGroup name="Secondary">
             {
                 error != ""
                 && 
@@ -67,7 +60,7 @@ export default function SetBackendUrl(props){
                 </label>
                 <textarea rows="4" value={text} onChange={updateValue}></textarea>
             </div>
-            <button class={(loading)?"button is-loading":"button"} type="button" onClick={apiSetBackendUrl}>Save</button>
+            <button class={(loading)?"button is-loading":"button"} onClick={apiSetSecondaryUrl} type="button">Save</button>
         </InputGroup>
     )
 }

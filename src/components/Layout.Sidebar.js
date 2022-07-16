@@ -1,7 +1,8 @@
+import "./component_styles/sidebar.css";
+
 import { h, Component } from "preact";
 
 import SidebarItem from "./Layout.SidebarItem.js";
-import IHome from "./icons/IHome.js";
 import IWifi from "./icons/IWifi.js";
 import ILock from "./icons/ILock.js";
 import IArrowOut from "./icons/IArrowOut.js";
@@ -30,7 +31,7 @@ export default class Sidebar extends Component{
                 </SidebarItem>
                 <SidebarItem route="ocpp" nav={props.nav}>
                     <IServer size="24" stroke="#ffffff" />
-                    OCCP 1.6
+                    OCPP 1.6
                     {props.nav.path}
                 </SidebarItem>
                 <SidebarItem route="security" nav={props.nav}>
