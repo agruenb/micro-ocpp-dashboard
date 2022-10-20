@@ -16,19 +16,26 @@ export default function SetSecondaryUrl(){
     const [text, setText] = useState("https://localhost:3000/index.html");
 
     function apiSetSecondaryUrl(){
+        onRequestStarted();
         let body = {
-            "url":text
+            "sec_url":text
         };
-        DataService.post("/hello_world.php", body)
+        DataService.post("/secondary_url", body)
         .then(data => {
-            setSuccess(data.new_value);
+            setSuccess("Updated secondary URL");
         })
         .catch( error => {
-            setError("Failed to update backend URL");
+            setError("Failed to update secondary URL");
         })
         .finally( () => {
-            //setLoading(false);
+            setLoading(false);
         })
+    }
+
+    function onRequestStarted(){
+        setSuccess("");
+        setError("");
+        setLoading(true);
     }
 
     function updateValue(event){
