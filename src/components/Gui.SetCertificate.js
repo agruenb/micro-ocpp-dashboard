@@ -5,42 +5,40 @@ import ICheck from "./icons/ICheck";
 import IForbidden from "./icons/IForbidden";
 import InputGroup from "./Layout.InputGroup";
 
-import { API_ENDPOINT_BACKEND_URL } from "../constants";
+import { API_ENDPOINT_CERTIFICATE } from "../constants";
 
-export default function SetBackendUrl(props){
+export default function SetCertificate(props){
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const [text, setText] = useState("")
-
-    function apiSetBackendUrl(){
+    function apiSetCertificate(){
         onRequestStarted();
         let body = {
-            "backendUrl":text
+            "caCert": document.getElementById("certTA").value
         };
-        DataService.post(API_ENDPOINT_BACKEND_URL, body)
+        DataService.post(API_ENDPOINT_CERTIFICATE, body)
         .then(data => {
-            setSuccess("Backend URL updated");
+            setSuccess("Certificate updated");
         })
         .catch( error => {
-            setError("Failed to update backend URL");
+            setError("Failed to update certificate");
         })
         .finally( () => {
             setLoading(false);
         })
     }
 
-    function apiGetBackendUrl() {
-        DataService.get(API_ENDPOINT_BACKEND_URL)
+    function apiGetCertificate() {
+        DataService.get(API_ENDPOINT_CERTIFICATE)
         .then(data => {
-            setText(data.backendUrl)
+            document.getElementById("certTA").value = data.caCert
         })
         .catch( error => {})
         .finally( () => {})
     }
-    apiGetBackendUrl();
+    apiGetCertificate();
 
     function onRequestStarted(){
         setSuccess("");
@@ -53,7 +51,7 @@ export default function SetBackendUrl(props){
     }
 
     return (
-        <InputGroup name="Backend">
+        <InputGroup name="Root Certificate">
             {
                 error != ""
                 && 
@@ -72,12 +70,12 @@ export default function SetBackendUrl(props){
             }
             <div class="form-item is-col">
                 <label>
-                    Backend URL
-                    <span class="is-desc">The URL of the backend server</span>
+                    Update Root Certificate
+                    <span class="is-desc"></span>
                 </label>
-                <input type="text" value={text} onChange={updateValue}></input>
+                <textarea id="certTA" rows="4"></textarea>
             </div>
-            <button class={(loading)?"button is-loading":"button"} type="button" onClick={apiSetBackendUrl}>Save</button>
+            <button class={(loading)?"button is-loading":"button"} type="button" onClick={apiSetCertificate}>Save</button>
         </InputGroup>
     )
 }

@@ -11,10 +11,9 @@ export default function ButtonGroup(props) {
             let buttonItem = props.buttons[i];
             //if button is not selected add secondary class
             let className = `button is-small ${(props.selected == buttonItem.value)?"":"is-secondary"}`;
-            function btnClick() {props.onSelect(buttonItem.value)};
             //construct button element
             btnElements.push(
-                <button class={className} type="button" onClick={btnClick}>
+                <button class={className} type="button" onClick={(() => {props.onSelect(buttonItem.value)})}>
                     {buttonItem.name}
                 </button>
             );

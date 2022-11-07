@@ -3,6 +3,7 @@ import "./component_styles/sidebar.css";
 import { h, Component } from "preact";
 
 import SidebarItem from "./Layout.SidebarItem.js";
+import IEvse from "./icons/IEvse.js";
 import IWifi from "./icons/IWifi.js";
 import ILock from "./icons/ILock.js";
 import IArrowOut from "./icons/IArrowOut.js";
@@ -22,9 +23,13 @@ export default class Sidebar extends Component{
             <aside class="sidebar">
                 <div class="sb-header">
                     <IMatthLogo size="50"></IMatthLogo>
-                    <div>Arduino Ocpp</div>
+                    <div>ArduinoOcpp</div>
                 </div>
                 <div class="divider" />
+                <SidebarItem route="evse" nav={props.nav}>
+                    <IEvse size="24" stroke="#ffffff" />
+                    EVSE
+                </SidebarItem>
                 <SidebarItem route="network" nav={props.nav}>
                     <IWifi size="24" stroke="#ffffff" />
                     Network

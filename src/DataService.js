@@ -4,16 +4,37 @@ class DataServiceClass {
     constructor(){
         this.apiRoot = API_ROOT;
     }
-    
+
     async post(endpoint, body) {
-        let url = this.apiRoot + endpoint;
         let options = {
-            method:"POST",
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
-              },
+            },
             body:JSON.stringify(body)
+        };
+        return this.request(endpoint, options);
+    }
+
+    async get(endpoint) {
+        let options = {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        
+        let result;
+        try {
+            result = await this.request(endpoint, options);
+        } catch (error) {
+            console.error("thrown");
         }
+        return result;
+    }
+    
+    async request(endpoint, options) {
+        let url = this.apiRoot + endpoint;
         let response;
         if(NODE_ENV == "development"){
             //this block is only included in the development build

@@ -2,6 +2,7 @@ import { h, Component, createContext  } from "preact";
 
 
 import Sidebar from "./Layout.Sidebar.js";
+import Evse from "./Path.Evse.js";
 import Network from "./Path.Network.js";
 import Security from "./Path.Security.js";
 import Ocpp from "./Path.Ocpp.js";
@@ -17,7 +18,7 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            path : "network"
+            path : "evse"
         }
     }
     navigation(){
@@ -46,6 +47,10 @@ export default class App extends Component {
 
     view(path){
         switch(path){
+            case "evse":
+                return (
+                    <Evse nav={this.navigation()} />
+                )
             case "network":
                 return (
                     <Network nav={this.navigation()} />

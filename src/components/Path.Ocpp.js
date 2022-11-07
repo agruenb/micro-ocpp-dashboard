@@ -1,5 +1,6 @@
 import { h } from "preact";
 import SetBackendUrl from "./Gui.SetBackendUrl";
+import SetEvseConnectionDetails from "./Gui.SetEvseConnection";
 import SetSecondaryUrl from "./Gui.SetSecondaryUrl";
 import FullPage from "./Layout.FullPage";
 
@@ -39,9 +40,12 @@ export default function Ocpp() {
 
     return (
         <FullPage>
-            <h2 class="is-stack-40">Ocpp 1.6</h2>
+            <h2 class="is-stack-40">OCPP 1.6</h2>
             <form class="is-stack-40 is-col">
                 <SetBackendUrl />
+            </form>
+            <form class="is-stack-40 is-col">
+                <SetEvseConnectionDetails />
             </form>
             <form class="is-stack-40">
                 <fieldset>
@@ -71,22 +75,6 @@ export default function Ocpp() {
             </form>
             <form class="is-stack-40">
                 <SetSecondaryUrl />
-            </form>
-            <form>
-                <fieldset>
-                    <legend>EVSE connection</legend>
-                    <div class="is-row">
-                        <div class="form-item is-col">
-                            <label>EVSE Name</label>
-                            <input type="text" value="company_wifi_ef3c98" />
-                        </div>
-                        <div class="form-item is-col">
-                            <label>Auth-Key</label>
-                            <input type="password" value="compfi_ef3c98" />
-                        </div>
-                    </div>
-                    <button class="button" type="button">Save</button>
-                </fieldset>
             </form>
         </FullPage>
     )
