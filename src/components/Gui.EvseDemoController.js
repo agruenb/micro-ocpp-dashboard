@@ -12,6 +12,10 @@ import { API_ENDPOINT_USER_AUTHORIZATION } from "../constants";
 
 export default class EvseController extends Component {
 
+    shadowState = {
+        lastRequestFullfilled: true
+    };
+
     constructor() {
         super();
         this.state = {
@@ -31,7 +35,10 @@ export default class EvseController extends Component {
         this.apiFetchEvState();
         // update time every second
         this.timer = setInterval(() => {
-            this.apiFetchEvseState();
+            if(this.shadowState.lastRequestFullfilled){
+                this.apiFetchEvseState();
+                this.shadowState.lastRequestFullfilled = false;
+            }
         }, 1000);
     }
 
@@ -56,6 +63,7 @@ export default class EvseController extends Component {
             //setError("Failed to process NFC card");
         })
         .finally( () => {
+            this.shadowState.lastRequestFullfilled = true;
             //setLoading(false);
         })
     }
