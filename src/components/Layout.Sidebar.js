@@ -28,33 +28,37 @@ export default class Sidebar extends Component{
                 <div class="divider" />
                 <SidebarItem route="evse" nav={props.nav}>
                     <IEvse size="24" stroke="#ffffff" />
-                    EVSE
+                    <span>EVSE</span>
                 </SidebarItem>
                 <SidebarItem route="network" nav={props.nav}>
                     <IWifi size="24" stroke="#ffffff" />
-                    Network
+                    <span>Network</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="ocpp" nav={props.nav}>
                     <IServer size="24" stroke="#ffffff" />
-                    OCPP 1.6
-                    {props.nav.path}
+                    <span>OCPP 1.6</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="security" nav={props.nav}>
                     <ILock size="24" />
-                    Security
+                    <span>Security</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="about" nav={props.nav}>
                     <IProcessor size="24" stroke="#ffffff" />
-                    Controller
+                    <span>Controller</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="other" nav={props.nav}>
                     <IMonitor size="24" stroke="#ffffff" />
-                    Devices
+                    <span>Devices</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <div class="divider" />
                 <SidebarItem route="logout" nav={props.nav}>
                     <IArrowOut size="24" />
-                    Logout
+                    <span>Logout</span>
                 </SidebarItem>
             </aside>
         )
