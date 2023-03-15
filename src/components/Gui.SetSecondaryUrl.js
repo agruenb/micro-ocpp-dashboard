@@ -2,8 +2,8 @@ import { h } from "preact";
 import { useState } from "preact/hooks";
 
 import InputGroup from "./Layout.InputGroup";
-import ICheck from "./icons/ICheck";
-import IForbidden from "./icons/IForbidden";
+import ICheck from "./icons/ICheck.svg";
+import IForbidden from "./icons/IForbidden.svg";
 
 import DataService from "../DataService";
 
@@ -56,7 +56,7 @@ export default function SetSecondaryUrl(){
                 success != ""
                 && 
                 <div class="alert is-success">
-                    <ICheck size="24" stroke="#20bc71" />
+                    <ICheck />
                     {success}
                 </div>
             }

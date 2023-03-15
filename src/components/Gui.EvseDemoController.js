@@ -1,8 +1,8 @@
 import { h, render, Component } from "preact"
 import { useState } from "preact/hooks"
 import DataService from "../DataService"
-import ICheck from "./icons/ICheck";
-import IForbidden from "./icons/IForbidden";
+import ICheck from "./icons/ICheck.svg";
+import IForbidden from "./icons/IForbidden.svg";
 
 import ButtonGroup from "./Util.ButtonGroup";
 
@@ -57,13 +57,13 @@ export default class EvseController extends Component {
                 chargePermission: data.chargePermission,
                 isCharging: data.isCharging,
                 ocppStatus: data.ocppStatus
-            })
+            });
+            this.shadowState.lastRequestFullfilled = true;
         })
         .catch( error => {
             //setError("Failed to process NFC card");
         })
         .finally( () => {
-            this.shadowState.lastRequestFullfilled = true;
             //setLoading(false);
         })
     }

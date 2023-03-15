@@ -1,6 +1,6 @@
 import { h, Component } from "preact";
 import WifiSignal from "./Diagram.WifiSignal";
-import IWifi from "./icons/IWifi";
+import IWifi from "./icons/IWifi.svg";
 import FullPage from "./Layout.FullPage";
 import RefreshButton from "./Util.RefreshButton";
 
@@ -30,7 +30,7 @@ export default class Network extends Component {
                                     <tbody>
                                         <tr>
                                             <td class="v-align-mid">
-                                                <IWifi size="22" stroke="#000"></IWifi>
+                                                <IWifi></IWifi>
                                                 Local_Network_Point
                                             </td>
                                             <td class="v-align-mid">
@@ -44,7 +44,7 @@ export default class Network extends Component {
                                         </tr>
                                         <tr>
                                             <td class="v-align-mid">
-                                                <IWifi size="22" stroke="#000"></IWifi>
+                                                <IWifi></IWifi>
                                                 Close_by_Wifi_0293
                                             </td>
                                             <td class="v-align-mid">
@@ -58,7 +58,7 @@ export default class Network extends Component {
                                         </tr>
                                         <tr>
                                             <td class="v-align-mid">
-                                                <IWifi size="22" stroke="#000"></IWifi>
+                                                <IWifi></IWifi>
                                                 Wifi-9079378
                                             </td>
                                             <td class="v-align-mid">

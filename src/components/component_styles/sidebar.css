@@ -9,6 +9,7 @@
 }
 .sb-header svg{
     margin-top:10px;
+    font-size:4em;
 }
 .sb-header div{
     margin-top:5px;
@@ -48,8 +49,10 @@
     width: 30px;
     margin: 10px;
     line-height: 24px;
+    font-size:1.2em;
 }
 /* Header */
 header .header-logo{
-    padding: 5px;
+    padding: 0 5px;
+    font-size: 1.4em;
 }

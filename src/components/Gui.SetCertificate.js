@@ -1,8 +1,8 @@
 import { h } from "preact"
 import { useState } from "preact/hooks"
 import DataService from "../DataService"
-import ICheck from "./icons/ICheck";
-import IForbidden from "./icons/IForbidden";
+import ICheck from "./icons/ICheck.svg";
+import IForbidden from "./icons/IForbidden.svg";
 import InputGroup from "./Layout.InputGroup";
 
 import { API_ENDPOINT_CERTIFICATE } from "../constants";

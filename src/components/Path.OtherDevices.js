@@ -1,6 +1,6 @@
 import { h } from "preact";
 import FullPage from "./Layout.FullPage";
-import IMonitor from "./icons/IMonitor";
+import IMonitor from "./icons/IMonitor.svg";
 import RefreshButton from "./Util.RefreshButton";
 
 export default function OtherDevices(){
@@ -24,7 +24,7 @@ export default function OtherDevices(){
                         <tbody>
                             <tr>
                                 <td>
-                                    <IMonitor size="22" stroke="#000"></IMonitor>
+                                    <IMonitor></IMonitor>
                                     SR-090832383
                                 </td>
                                 <td>
@@ -33,7 +33,7 @@ export default function OtherDevices(){
                             </tr>
                             <tr>
                                 <td>
-                                    <IMonitor size="22" stroke="#000"></IMonitor>
+                                    <IMonitor></IMonitor>
                                     Smart_device_029
                                 </td>
                                 <td>
@@ -42,7 +42,7 @@ export default function OtherDevices(){
                             </tr>
                             <tr>
                                 <td>
-                                    <IMonitor size="22" stroke="#000"></IMonitor>
+                                    <IMonitor></IMonitor>
                                     IOT_machine_923
                                 </td>
                                 <td>

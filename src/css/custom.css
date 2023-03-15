@@ -17,6 +17,7 @@
 td svg{
     margin-right:10px;
     vertical-align: bottom;
+    font-size:1.3em;
 }
 .label svg{
     vertical-align: text-top;
@@ -24,6 +25,7 @@ td svg{
 .alert svg{
     margin-right:16px;
     vertical-align: top;
+    font-size:1.3em;
 }
 .align-center{
     display:flex;

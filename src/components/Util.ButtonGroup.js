@@ -6,7 +6,6 @@ export default function ButtonGroup(props) {
 
     function buttons() {
         let btnElements = [];
-        console.log(props.buttons);
         for (let i = 0; i < props.buttons.length; i++) {
             let buttonItem = props.buttons[i];
             //if button is not selected add secondary class

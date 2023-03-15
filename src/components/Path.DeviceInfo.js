@@ -1,6 +1,5 @@
 import { h } from "preact";
 import FullPage from "./Layout.FullPage";
-import IArrowRotate from "./icons/IArrorRotate";
 import RefreshButton from "./Util.RefreshButton";
 
 export default function DeviceInfo(){

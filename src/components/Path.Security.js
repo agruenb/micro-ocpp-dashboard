@@ -2,8 +2,6 @@ import { h, Component } from "preact";
 import FullPage from "./Layout.FullPage";
 import SetCertificate from "./Gui.SetCertificate";
 
-import IArrowRotate from "./icons/IArrorRotate";
-
 export default class Security extends Component {
 
     constructor() {
