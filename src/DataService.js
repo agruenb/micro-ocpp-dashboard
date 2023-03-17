@@ -18,19 +18,9 @@ class DataServiceClass {
 
     async get(endpoint) {
         let options = {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            method: "GET"
         };
-        
-        let result;
-        try {
-            result = await this.request(endpoint, options);
-        } catch (error) {
-            console.error("thrown");
-        }
-        return result;
+        return this.request(endpoint, options);
     }
     
     async request(endpoint, options) {

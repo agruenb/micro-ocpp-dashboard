@@ -11,6 +11,8 @@ import IMatthLogo from "./icons/IMatthLogo.svg";
 import IServer from "./icons/IServer.svg";
 import IProcessor from "./icons/IProcessor.svg";
 import IMonitor from "./icons/IMonitor.svg";
+import IControls from "./icons/IControls.svg";
+
 
 export default class Sidebar extends Component{
     
@@ -26,8 +28,12 @@ export default class Sidebar extends Component{
                     <div>ArduinoOcpp</div>
                 </div>
                 <div class="divider" />
+                <SidebarItem route="controlcenter" nav={props.nav}>
+                    <IControls />
+                    <span>Control Center</span>
+                </SidebarItem>
                 <SidebarItem route="evse" nav={props.nav}>
-                    <IEvse size="24" stroke="#ffffff" />
+                    <IEvse />
                     <span>EVSE</span>
                 </SidebarItem>
                 <SidebarItem route="network" nav={props.nav}>

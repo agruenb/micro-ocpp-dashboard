@@ -11,7 +11,7 @@
     height:1.5px;
     background:var(--divider);
 }
-.button .pad-icon svg{
+.button .pad-icon svg, .button.pad-icon svg{
     margin-right:10px;
 }
 td svg{
@@ -42,4 +42,7 @@ td svg{
 }
 .v-align-mid{
     vertical-align: middle;
+}
+.space-right{
+    margin-right: 28px;
 }
