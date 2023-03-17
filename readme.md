@@ -24,7 +24,7 @@ more information see Preact's website: [(https://preactjs.com/)](https://preactj
 ### Compression
 
 The greatest reduction in storage space is achived during the final compression of the project using g-zip. The dashboard
-is deployed as a single g-ziped file without dependencies. This also allows a very simple design on the server side. For more information on the compression process see Section [Build the project](##build-the-project).
+is deployed as a single g-ziped file without dependencies. This also allows a very simple design on the server side. For more information on the compression process see Section [Build the project](#build-the-project).
 
 To be able to bundle everything into a single file all assets (images, external data/text) have to be embedded in the HTML. The [SVGR](https://react-svgr.com/docs/webpack/) library is used to convert SVG images into React components (compatible with Preact). This means that SVG images are treated as components, not assets, in the directory structure. This also means that **no assets should be placed in the public folder and that currently the only supported image type is SVG**.
 
