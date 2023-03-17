@@ -4,7 +4,7 @@ This is a web-based dashboard for the Arduino OCPP library.
 
 ![Screenshot](docs/img/dashboard_screenshot.png)
 
-## Purpose and achitechture
+## Purpose and Achitechture
 
 This dashboard is designed to be hosted on a microcontroller. With this requirement in mind some important restrictions have to be acknowledged.
 These are:
