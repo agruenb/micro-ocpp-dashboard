@@ -11,7 +11,7 @@ import IForbidden from "./icons/IForbidden.svg";
 import ITrash from "./icons/ITrash.svg";
 import IUpload from "./icons/IUpload.svg";
 
-export default function WebsocketControlPanel(props) {
+export default function StationControlPanel(props) {
 
     const [fetching, setFetching] = useState(false);
     const [posting, setPosting] = useState(false);
@@ -25,42 +25,34 @@ export default function WebsocketControlPanel(props) {
     const [showTable, setShowTable] = useState(false);
     const [showInputs, setShowInputs] = useState(false);
 
-    const [backendUrl, setBackendUrl] = useState("");
-    const [chargeBoxId, setChargeBoxId] = useState("");
-    const [authorizationKey, setAuthorizationKey] = useState("");
-    const [caCert, setCaCert] = useState("");
-    const [pingInterval, setPingInterval] = useState(0);
-    const [reconnectInterval, setReconnectInterval] = useState(0);
-    const [dnsUrl, setDnsUrl] = useState("");
+    const [chargePointModel, setChargePointModel] = useState();
+    const [chargePointSerialNumber, setChargePointSerialNumber] = useState();
+    const [chargePointVendor, setChargePointVendor] = useState();
+    const [firmwareVersion, setFirmwareVersion] = useState();
 
-    const [_backendUrl, _setBackendUrl] = useState("");
-    const [_chargeBoxId, _setChargeBoxId] = useState("");
-    const [_authorizationKey, _setAuthorizationKey] = useState("");
-    const [_caCert, _setCaCert] = useState("");
-    const [_pingInterval, _setPingInterval] = useState(-1);
-    const [_reconnectInterval, _setReconnectInterval] = useState(-1);
-    const [_dnsUrl, _setDnsUrl] = useState("");
+    const [_chargePointModel, _setChargePointModel] = useState();
+    const [_chargePointSerialNumber, _setChargePointSerialNumber] = useState();
+    const [_chargePointVendor, _setChargePointVendor] = useState();
+    const [_firmwareVersion, _setFirmwareVersion] = useState();
 
     function fetchValues(){
         if(fetching) return;
         setFetching(true);
-        DataService.get("/websocket").then(
+        DataService.get("/station").then(
             resp => {
+                setChargePointModel(resp.chargePointModel);
+                setChargePointSerialNumber(resp.chargePointSerialNumber);
+                setChargePointVendor(resp.chargePointVendor);
+                setFirmwareVersion(resp.firmwareVersion);
+
                 setFetchError("");
-                setFetchSuccess("Successfully fetched websocket data (" + (new Date()).toISOString() + ")");//TODO updated ago
-                setBackendUrl(resp.backendUrl);
-                setChargeBoxId(resp.chargeBoxId);
-                setAuthorizationKey(resp.authorizationKey);
-                setCaCert(resp.caCert);
-                setPingInterval(resp.pingInterval);
-                setReconnectInterval(resp.reconnectInterval);
-                setDnsUrl(resp.dnsUrl);
+                setFetchSuccess("Successfully fetched station data (" + (new Date()).toISOString() + ")");//TODO updated ago
                 setShowTable(true);
             }
         ).catch(
             e => {
                 setFetchSuccess("");
-                setFetchError("Unable to fetch websocket");
+                setFetchError("Unable to fetch station");
             }
         ).finally(
             () => {
@@ -72,36 +64,30 @@ export default function WebsocketControlPanel(props) {
     function postValues(){
         if(posting) return;
         setPosting(true);
-        DataService.post("/websocket", {
-            backendUrl: _backendUrl,
-            chargeBoxId: _chargeBoxId,
-            authorizationKey: _authorizationKey,
-            caCert: _caCert,
-            pingInterval: _pingInterval,
-            reconnectingInterval: _reconnectInterval,
-            dnsUrl: _dnsUrl
+        DataService.post("/station", {
+            chargePointModel: _chargePointModel,
+            chargePointSerialNumber: _chargePointSerialNumber,
+            chargePointVendor: _chargePointVendor,
+            firmwareVersion: _firmwareVersion
         }).then(
             resp => {
                 if(
-                    resp.backendUrl === _backendUrl &&
-                    resp.chargeBoxId === _chargeBoxId &&
-                    resp.authorizationKey === _authorizationKey &&
-                    resp.caCert === _caCert &&
-                    resp.pingInterval === _pingInterval &&
-                    resp.reconnectingInterval === _reconnectInterval &&
-                    resp.dnsUrl === _dnsUrl
+                    resp.chargePointModel === _chargePointModel &&
+                    resp.chargePointSerialNumber === _chargePointSerialNumber &&
+                    resp.chargePointVendor === _chargePointVendor &&
+                    resp.firmwareVersion === _firmwareVersion
                 ){
-                    setPostSuccess("Websocket update confirmed by the server (" + (new Date()).toISOString() + ")");
+                    setPostSuccess("Station update confirmed by the server (" + (new Date()).toISOString() + ")");
                     setPostError("");
                 }else{
                     setPostSuccess("");
-                    setPostError("Error while confirming update - You should re-fetch the websocket");
+                    setPostError("Error while confirming update - You should re-fetch the station");
                 }
             }
         ).catch(
             e => {
                 setPostSuccess("");
-                setPostError("Unable to fetch websocket");
+                setPostError("Unable to fetch station");
             }
         ).finally(
             () => {
@@ -111,22 +97,16 @@ export default function WebsocketControlPanel(props) {
     }
 
     function duplicateAllValues(){
-        _setBackendUrl(backendUrl);
-        _setChargeBoxId(chargeBoxId);
-        _setAuthorizationKey(authorizationKey);
-        _setCaCert(caCert);
-        _setPingInterval(pingInterval);
-        _setReconnectInterval(reconnectInterval);
-        _setDnsUrl(dnsUrl);
+        _setChargePointModel(chargePointModel);
+        _setChargePointSerialNumber(chargePointSerialNumber);
+        _setChargePointVendor(chargePointVendor);
+        _setFirmwareVersion(firmwareVersion);
     }
     function clearAllValues(){
-        _setBackendUrl("");
-        _setChargeBoxId("");
-        _setAuthorizationKey("");
-        _setCaCert("");
-        _setPingInterval(-1);
-        _setReconnectInterval(-1);
-        _setDnsUrl("");
+        _setChargePointModel("");
+        _setChargePointSerialNumber("");
+        _setChargePointVendor("");
+        _setFirmwareVersion("");
     }
 
     function _buildCurrentValuesTable() {
@@ -145,13 +125,10 @@ export default function WebsocketControlPanel(props) {
             <tbody>
                 {
                     [
-                        ["Backend URL", backendUrl],
-                        ["Chargebox ID", chargeBoxId],
-                        ["Authoriztion Key", authorizationKey],
-                        ["CA Certificate", caCert],
-                        ["Ping Interval", pingInterval],
-                        ["Reconnect Interval", reconnectInterval],
-                        ["DNS URL", dnsUrl],
+                        ["Charge Point Model", chargePointModel],
+                        ["Charge Point Serial Number", chargePointSerialNumber],
+                        ["Charge Point Vendor", chargePointVendor],
+                        ["Firmware Version", firmwareVersion]
                     ].map((el) => { return _row(el[0], el[1]) })
                 }
             </tbody>
@@ -159,7 +136,7 @@ export default function WebsocketControlPanel(props) {
     }
 
     return <fieldset class="is-col">
-        <legend>Websocket</legend>
+        <legend>Station</legend>
         {
             fetchError != ""
             && 
@@ -182,7 +159,7 @@ export default function WebsocketControlPanel(props) {
                         {
                             !fetching && <IDownload />
                         }
-                        Fetch Websocket
+                        Fetch Station
                     </button>
                 </div>
             </div>
@@ -196,7 +173,7 @@ export default function WebsocketControlPanel(props) {
                 <div class="is-col">
                     <button type="button" class="button is-tertiary pad-icon" onClick={() => { setShowInputs(!showInputs) }}>
                         <ICaretDown style={`${(showInputs ? "" : StyleBuilder.rotate("-90"))}transition:0.2s;`} />
-                        Websocket Options
+                        Station Options
                     </button>
                 </div>
             </div>
@@ -227,7 +204,7 @@ export default function WebsocketControlPanel(props) {
                                 {
                                     !posting && <IUpload />
                                 }
-                                Update Websocket
+                                Update Station
                             </button>
                             <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>clearAllValues()}>
                                 <ITrash />
@@ -241,58 +218,34 @@ export default function WebsocketControlPanel(props) {
                     </div>
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
-                            <label>Backend URL</label>
+                            <label>Charge Point Model</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="backendUrl" value={_backendUrl} onChange={e=>_setBackendUrl(e.target.value)} />
+                            <input type="text" placeholder="chargePointModel" value={_chargePointModel} onChange={e=>_setChargePointModel(e.target.value)} />
                         </div>
                     </div>
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
-                            <label>Chargebox ID</label>
+                            <label>Charge Point Serial Number</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="chargeBoxId" value={_chargeBoxId} onChange={e=>_setChargeBoxId(e.target.value)} />
+                            <input type="text" placeholder="chargePointSerialNumber" value={_chargePointSerialNumber} onChange={e=>_setChargePointSerialNumber(e.target.value)} />
                         </div>
                     </div>
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
-                            <label>Authoriztion Key</label>
+                            <label>Charge Point Vendor</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="authorizationKey" value={_authorizationKey} onChange={e=>_setAuthorizationKey(e.target.value)} />
-                        </div>
-                    </div>
-                    <div class="is-row is-stack-8">
-                        <div class="is-col align-center">
-                            <label>CA Certificate</label>
-                        </div>
-                        <div class="is-col">
-                            <input type="text" placeholder="caCert" value={_caCert} onChange={e=>_setCaCert(e.target.value)}/>
-                        </div>
-                    </div>
-                    <div class="is-row is-stack-8">
-                        <div class="is-col align-center">
-                            <label>Ping Interval</label>
-                        </div>
-                        <div class="is-col">
-                            <input type="number" placeholder="pingInterval" value={_pingInterval} onChange={e=>_setPingInterval(e.target.value)}/>
-                        </div>
-                    </div>
-                    <div class="is-row is-stack-8">
-                        <div class="is-col align-center">
-                            <label>Reconnect Interval</label>
-                        </div>
-                        <div class="is-col">
-                            <input type="number" placeholder="reconnectInterval" value={_reconnectInterval} onChange={e=>_setReconnectInterval(e.target.value)} />
+                            <input type="text" placeholder="chargePointVendor" value={_chargePointVendor} onChange={e=>_setChargePointVendor(e.target.value)}/>
                         </div>
                     </div>
                     <div class="is-row">
                         <div class="is-col align-center">
-                            <label>DNS URL</label>
+                            <label>Firmware Version</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="dnsUrl" value={_dnsUrl} onChange={e=>_setDnsUrl(e.target.value)}/>
+                            <input type="text" placeholder="firmwareVersion" value={_firmwareVersion} onChange={e=>_setFirmwareVersion(e.target.value)}/>
                         </div>
                     </div>
                 </div>
