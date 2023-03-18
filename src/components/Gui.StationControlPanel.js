@@ -2,6 +2,7 @@ import { h } from "preact";
 import { useState } from "preact/hooks";
 import DataService from "../DataService";
 import StyleBuilder from "../StyleBuilder";
+import FetchButton from "./Util.FetchButton";
 
 import ICaretDown from "./icons/ICaretDown.svg";
 import IDownload from "./icons/IDownload.svg";
@@ -13,6 +14,8 @@ import IUpload from "./icons/IUpload.svg";
 
 export default function StationControlPanel(props) {
 
+    const [fetchStart, setFetchStart] = useState(undefined);
+    const [fetchStop, setFetchStop] = useState(undefined);
     const [fetching, setFetching] = useState(false);
     const [posting, setPosting] = useState(false);
 
@@ -37,6 +40,8 @@ export default function StationControlPanel(props) {
 
     function fetchValues(){
         if(fetching) return;
+        setFetchStart(new Date());
+        setFetchStop(undefined);
         setFetching(true);
         DataService.get("/station").then(
             resp => {
@@ -56,6 +61,7 @@ export default function StationControlPanel(props) {
             }
         ).finally(
             () => {
+                setFetchStop(new Date());
                 setFetching(false);
             }
         )
@@ -154,15 +160,12 @@ export default function StationControlPanel(props) {
             </div>
         }
         <div class={`is-row ${showTable?"is-stack-20":""}`}>
-                <div class="is-col">
-                    <button type="button" class={`button ${(fetching)?"is-loading":"pad-icon"}`} onClick={()=>{fetchValues()}}>
-                        {
-                            !fetching && <IDownload />
-                        }
-                        Fetch Station
-                    </button>
-                </div>
+            <div class="is-col">
+                <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
+                    Fetch Station
+                </FetchButton>
             </div>
+        </div>
         {
             showTable &&
             _buildCurrentValuesTable()

@@ -2,9 +2,9 @@ import { h } from "preact";
 import { useState } from "preact/hooks";
 import DataService from "../DataService";
 import StyleBuilder from "../StyleBuilder";
+import FetchButton from "./Util.FetchButton";
 
 import ICaretDown from "./icons/ICaretDown.svg";
-import IDownload from "./icons/IDownload.svg";
 import ICheck from "./icons/ICheck.svg";
 import ICopy from "./icons/ICopy.svg";
 import IForbidden from "./icons/IForbidden.svg";
@@ -13,6 +13,8 @@ import IUpload from "./icons/IUpload.svg";
 
 export default function WebsocketControlPanel(props) {
 
+    const [fetchStart, setFetchStart] = useState(undefined);
+    const [fetchStop, setFetchStop] = useState(undefined);
     const [fetching, setFetching] = useState(false);
     const [posting, setPosting] = useState(false);
 
@@ -43,6 +45,8 @@ export default function WebsocketControlPanel(props) {
 
     function fetchValues(){
         if(fetching) return;
+        setFetchStart(new Date());
+        setFetchStop(undefined);
         setFetching(true);
         DataService.get("/websocket").then(
             resp => {
@@ -64,6 +68,7 @@ export default function WebsocketControlPanel(props) {
             }
         ).finally(
             () => {
+                setFetchStop(new Date());
                 setFetching(false);
             }
         )
@@ -178,12 +183,9 @@ export default function WebsocketControlPanel(props) {
         }
         <div class={`is-row ${showTable?"is-stack-20":""}`}>
                 <div class="is-col">
-                    <button type="button" class={`button ${(fetching)?"is-loading":"pad-icon"}`} onClick={()=>{fetchValues()}}>
-                        {
-                            !fetching && <IDownload />
-                        }
+                    <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
                         Fetch Websocket
-                    </button>
+                    </FetchButton>
                 </div>
             </div>
         {

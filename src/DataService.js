@@ -26,9 +26,10 @@ class DataServiceClass {
     async request(endpoint, options) {
         let url = this.apiRoot + endpoint;
         let response;
-        if(NODE_ENV == "development"){
+        if(NODE_ENV === "development"){
             //this block is only included in the development build
             try{
+                console.log("Fetch - Options: ", options);
                 response = await fetch(url, options);
             }catch(error){
                 console.error("The api request could not complete successfully", `URL: ${url}`, body)
@@ -42,9 +43,10 @@ class DataServiceClass {
                 console.error("Could not parse api response as JSON", `Response: ${response_raw}`);
                 throw error;
             }
+            console.log("Response: ", response_json);
             return response_json;
         }
-        if(NODE_ENV == "production"){
+        if(NODE_ENV === "production"){
             //this block is only included in the production build
             response = await fetch(url, options);
             return response.json();

@@ -21,6 +21,9 @@ td svg{
 }
 .label svg{
     vertical-align: text-top;
+    font-size: 1.2em;
+    padding: 2px;
+    margin-right: 3px;
 }
 .alert svg{
     margin-right:16px;
