@@ -5,7 +5,7 @@ import IClock from "./icons/IClock.svg";
 
 export default function FetchButton(props){
     return <div>
-        <button type="button" class={`button space-right ${(props.fetching) ? "is-loading" : "pad-icon"}`} onClick={props.onClick}>
+        <button type="button" class={`button space-right ${props.fetching?"is-loading":"pad-icon"}`} onClick={props.onClick}>
             {
                 !props.fetching && <IDownload />
             }
@@ -20,7 +20,7 @@ export default function FetchButton(props){
         }
         {
             !props.fetching && props.fetchSuccess &&
-            <span class="label is-success">
+            <span class="label">
                 <IClock />
                 <span>Request duration: </span>
                 <StopWatch startTime={props.fetchStart} stopTime={props.fetchStop} />

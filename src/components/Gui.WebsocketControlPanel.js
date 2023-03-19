@@ -3,6 +3,7 @@ import { useState } from "preact/hooks";
 import DataService from "../DataService";
 import StyleBuilder from "../StyleBuilder";
 import FetchButton from "./Util.FetchButton";
+import HtmlBuilder from "../HtmlBuilder";
 
 import ICaretDown from "./icons/ICaretDown.svg";
 import ICheck from "./icons/ICheck.svg";
@@ -134,37 +135,15 @@ export default function WebsocketControlPanel(props) {
         _setDnsUrl("");
     }
 
-    function _buildCurrentValuesTable() {
-
-        function _row(key, value) {
-            return <tr>
-                <td class="v-align-mid">
-                    {key}
-                </td>
-                <td class="v-align-mid">
-                    <b>{value}</b>
-                </td>
-            </tr>
-        }
-        return <table>
-            <tbody>
-                {
-                    [
-                        ["Backend URL", backendUrl],
-                        ["Chargebox ID", chargeBoxId],
-                        ["Authoriztion Key", authorizationKey],
-                        ["CA Certificate", caCert],
-                        ["Ping Interval", pingInterval],
-                        ["Reconnect Interval", reconnectInterval],
-                        ["DNS URL", dnsUrl],
-                    ].map((el) => { return _row(el[0], el[1]) })
-                }
-            </tbody>
-        </table>
-    }
-
     return <fieldset class="is-col">
         <legend>Websocket</legend>
+        <div class={`is-row ${showTable?"is-stack-20":""}`}>
+            <div class="is-col">
+                <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
+                    Fetch Websocket
+                </FetchButton>
+            </div>
+        </div>
         {
             fetchError != ""
             && 
@@ -181,16 +160,17 @@ export default function WebsocketControlPanel(props) {
                 {fetchSuccess}
             </div>
         }
-        <div class={`is-row ${showTable?"is-stack-20":""}`}>
-                <div class="is-col">
-                    <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
-                        Fetch Websocket
-                    </FetchButton>
-                </div>
-            </div>
         {
             showTable &&
-            _buildCurrentValuesTable()
+            HtmlBuilder.simpleTable([
+                ["Backend URL", <b>{backendUrl}</b>],
+                ["Chargebox ID", <b>{chargeBoxId}</b>],
+                ["Authoriztion Key", <b>{authorizationKey}</b>],
+                ["CA Certificate", <b>{caCert}</b>],
+                ["Ping Interval", <b>{pingInterval}</b>],
+                ["Reconnect Interval", <b>{reconnectInterval}</b>],
+                ["DNS URL", <b>{dnsUrl}</b>],
+            ])
         }
         {
             showTable &&
@@ -206,22 +186,6 @@ export default function WebsocketControlPanel(props) {
         {
             showInputs &&
             <div>
-                {
-                    postError != ""
-                    && 
-                    <div class="alert is-error">
-                        <IForbidden />
-                        {postError}
-                    </div>
-                }
-                {
-                    postSuccess != ""
-                    && 
-                    <div class="alert is-success">
-                        <ICheck />
-                        {postSuccess}
-                    </div>
-                }
                 <div class="is-col">
                     <div class="is-row is-stack-20">
                         <div class="is-col">
@@ -241,6 +205,22 @@ export default function WebsocketControlPanel(props) {
                             </button>
                         </div>
                     </div>
+                    {
+                    postError != ""
+                    && 
+                    <div class="alert is-error">
+                        <IForbidden />
+                        {postError}
+                    </div>
+                    }
+                    {
+                        postSuccess != ""
+                        && 
+                        <div class="alert is-success">
+                            <ICheck />
+                            {postSuccess}
+                        </div>
+                    }
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
                             <label>Backend URL</label>

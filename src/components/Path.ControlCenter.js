@@ -7,8 +7,10 @@ import StationControlPanel from "./Gui.StationControlPanel";
 import FullPage from "./Layout.FullPage";
 import IDownload from "./icons/IDownload.svg";
 import ICheck from "./icons/ICheck.svg";
+import IDatabase from "./icons/IDatabase.svg";
 import IForbidden from "./icons/IForbidden.svg";
 import FetchButton from "./Util.FetchButton";
+import ConnectorControlPanel from "./Gui.ConnectorControlPanel";
 
 
 export default function ControlCenter(props){
@@ -63,19 +65,29 @@ export default function ControlCenter(props){
         </nav>
     }
 
+    function _buildConnectorPanels(){
+        let connectorPanels = [];
+        for(let i = 0; i < connectorIds.length; i++){
+            connectorPanels.push(
+                <ConnectorControlPanel connectorId={connectorIds[i]} display={(i === selectedTab)} />
+            )
+        }
+        return connectorPanels
+    }
+
     return (
         <FullPage>
             <h2 class="is-stack-40">Control Center</h2>
             <div class="is-col">
                 <div class="is-row is-stack-40">
                     <div class="is-col">
-                        <button class="button is-secondary pad-icon space-right">
+                        <button class="button is-tertiary pad-icon space-right">
                             <IDownload />
                             Fetch All
                         </button>
                         <button class="button is-tertiary pad-icon">
-                            <IDownload />
-                            Recover all from localstorage
+                            <IDatabase />
+                            Recover from localstorage
                         </button>
                     </div>
                 </div>
@@ -83,6 +95,13 @@ export default function ControlCenter(props){
                 <StationControlPanel />
                 <fieldset class="is-col">
                     <legend>Connectors</legend>
+                    <div class={`is-row ${showTabs?"is-stack-20":""}`}>
+                        <div class="is-col">
+                            <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
+                                Fetch Connectors
+                            </FetchButton>
+                        </div>
+                    </div>
                     {
                         fetchError != ""
                         && 
@@ -99,13 +118,6 @@ export default function ControlCenter(props){
                             {fetchSuccess}
                         </div>
                     }
-                    <div class={`is-row ${showTabs?"is-stack-20":""}`}>
-                        <div class="is-col">
-                            <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
-                                Fetch Connectors
-                            </FetchButton>
-                        </div>
-                    </div>
                     {
                         showTabs &&
                         <div class="is-row is-stack-20">
@@ -113,6 +125,10 @@ export default function ControlCenter(props){
                                 {_buildConnectorTabs()}
                             </div>
                         </div>
+                    }
+                    {
+                        showTabs && 
+                        _buildConnectorPanels()
                     }
                 </fieldset>
             </div>

@@ -3,14 +3,15 @@ import { useState } from "preact/hooks";
 import DataService from "../DataService";
 import StyleBuilder from "../StyleBuilder";
 import FetchButton from "./Util.FetchButton";
+import HtmlBuilder from "../HtmlBuilder";
 
 import ICaretDown from "./icons/ICaretDown.svg";
-import IDownload from "./icons/IDownload.svg";
 import ICheck from "./icons/ICheck.svg";
 import ICopy from "./icons/ICopy.svg";
 import IForbidden from "./icons/IForbidden.svg";
 import ITrash from "./icons/ITrash.svg";
 import IUpload from "./icons/IUpload.svg";
+
 
 export default function StationControlPanel(props) {
 
@@ -115,34 +116,15 @@ export default function StationControlPanel(props) {
         _setFirmwareVersion("");
     }
 
-    function _buildCurrentValuesTable() {
-
-        function _row(key, value) {
-            return <tr>
-                <td class="v-align-mid">
-                    {key}
-                </td>
-                <td class="v-align-mid">
-                    <b>{value}</b>
-                </td>
-            </tr>
-        }
-        return <table>
-            <tbody>
-                {
-                    [
-                        ["Charge Point Model", chargePointModel],
-                        ["Charge Point Serial Number", chargePointSerialNumber],
-                        ["Charge Point Vendor", chargePointVendor],
-                        ["Firmware Version", firmwareVersion]
-                    ].map((el) => { return _row(el[0], el[1]) })
-                }
-            </tbody>
-        </table>
-    }
-
     return <fieldset class="is-col">
         <legend>Station</legend>
+        <div class={`is-row ${showTable?"is-stack-20":""}`}>
+            <div class="is-col">
+                <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
+                    Fetch Station
+                </FetchButton>
+            </div>
+        </div>
         {
             fetchError != ""
             && 
@@ -159,16 +141,14 @@ export default function StationControlPanel(props) {
                 {fetchSuccess}
             </div>
         }
-        <div class={`is-row ${showTable?"is-stack-20":""}`}>
-            <div class="is-col">
-                <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
-                    Fetch Station
-                </FetchButton>
-            </div>
-        </div>
         {
             showTable &&
-            _buildCurrentValuesTable()
+            HtmlBuilder.simpleTable([
+                ["Charge Point Model", <b>{chargePointModel}</b>],
+                ["Charge Point Serial Number", <b>{chargePointSerialNumber}</b>],
+                ["Charge Point Vendor", <b>{chargePointVendor}</b>],
+                ["Firmware Version", <b>{firmwareVersion}</b>]
+            ])
         }
         {
             showTable &&
@@ -184,22 +164,6 @@ export default function StationControlPanel(props) {
         {
             showInputs &&
             <div>
-                {
-                    postError != ""
-                    && 
-                    <div class="alert is-error">
-                        <IForbidden />
-                        {postError}
-                    </div>
-                }
-                {
-                    postSuccess != ""
-                    && 
-                    <div class="alert is-success">
-                        <ICheck />
-                        {postSuccess}
-                    </div>
-                }
                 <div class="is-col">
                     <div class="is-row is-stack-20">
                         <div class="is-col">
@@ -219,6 +183,22 @@ export default function StationControlPanel(props) {
                             </button>
                         </div>
                     </div>
+                    {
+                        postError != ""
+                        && 
+                        <div class="alert is-error">
+                            <IForbidden />
+                            {postError}
+                        </div>
+                    }
+                    {
+                        postSuccess != ""
+                        && 
+                        <div class="alert is-success">
+                            <ICheck />
+                            {postSuccess}
+                        </div>
+                    }
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
                             <label>Charge Point Model</label>
