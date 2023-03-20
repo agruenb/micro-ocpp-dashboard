@@ -13,12 +13,21 @@ export default function ConnectorControlPanel(props){
     },
     [props.autofetch]);
 
-    return <div class={`is-row is-stack-20 ${props.display?"":"hide"}`}>
-        <div class="is-col">
-            <EvseControlPanel autofetch={props.autofetch} connectorId={props.connectorId}  />
-            <MeterControlPanel autofetch={props.autofetch} connectorId={props.connectorId} />
-            <TransactionControlPanel autofetch={props.autofetch} connectorId={props.connectorId} />
-            <SmartChargingControlPanel autofetch={props.autofetch} connectorId={props.connectorId} />
+    return (
+        <div class={`is-border-radius is-shadow-1 is-padded-16 ${props.display?"":"hide"}`}>
+            <h3 class="is-stack-20">Connector {props.connectorId}</h3>
+            <div class={`is-row`}>
+                <div class="is-col">
+                    <EvseControlPanel autofetch={props.autofetch} connectorId={props.connectorId} class="is-border-top" />
+                    <div class="is-border-top is-stack-20" />
+                    <MeterControlPanel autofetch={props.autofetch} connectorId={props.connectorId} />
+                    <div class="is-border-top is-stack-20" />
+                    <TransactionControlPanel autofetch={props.autofetch} connectorId={props.connectorId} />
+                    <div class="is-border-top is-stack-20" />
+                    <SmartChargingControlPanel autofetch={props.autofetch} connectorId={props.connectorId} />
+                </div>
+            </div>
         </div>
-    </div>
+    )
+    
 }

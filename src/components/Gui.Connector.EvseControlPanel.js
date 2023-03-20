@@ -7,13 +7,15 @@ import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder.js";
 import OpenButton from "./Util.OpenButton";
 import DateFormatter from "../DateFormatter";
+import { Fragment } from "preact";
 
 import ICheck from "./icons/ICheck.svg";
 import IForbidden from "./icons/IForbidden.svg";
 import IUpload from "./icons/IUpload.svg";
 import ICopy from "./icons/ICopy.svg";
+import ButtonGroup from "./Util.ButtonGroup";
 
-export default function EvseControlPanel(props){
+export default function EvseControlPanel(props) {
 
     const [fetchStart, setFetchStart] = useState(undefined);
     const [fetchStop, setFetchStop] = useState(undefined);
@@ -37,19 +39,19 @@ export default function EvseControlPanel(props){
     const [_evReady, _setEvReady] = useState(false);
     const [_evseReady, _setEvseReady] = useState(false);
 
-    useEffect(()=>{
-        if(props.autofetch){
+    useEffect(() => {
+        if (props.autofetch) {
             fetchValues();
         }
     },
-    [props.autofetch]);
+        [props.autofetch]);
 
-    function fetchValues(){
-        if(fetching) return;
+    function fetchValues() {
+        if (fetching) return;
         setFetchStart(new Date());
         setFetchStop(undefined);
         setFetching(true);
-        DataService.get("/connector/" + props.connectorId +  "/evse").then(
+        DataService.get("/connector/" + props.connectorId + "/evse").then(
             resp => {
                 setEvPlugged(resp.evPlugged);
                 setEvReady(resp.evReady);
@@ -73,8 +75,8 @@ export default function EvseControlPanel(props){
         );
     }
 
-    function postValues(){
-        if(posting) return;
+    function postValues() {
+        if (posting) return;
         setPosting(true);
         DataService.post("/connector/" + props.connectorId + "/evse", {
             evPlugged: _evPlugged,
@@ -82,14 +84,14 @@ export default function EvseControlPanel(props){
             evseReady: _evseReady
         }).then(
             resp => {
-                if(
+                if (
                     resp.evPlugged === _evPlugged &&
                     resp.evReady === _evReady &&
                     resp.evseReady === _evseReady
-                ){
+                ) {
                     setPostSuccess(`Evse update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
                     setPostError("");
-                }else{
+                } else {
                     setPostSuccess("");
                     setPostError("Error while confirming update - You should re-fetch the evse");
                 }
@@ -106,7 +108,7 @@ export default function EvseControlPanel(props){
         )
     }
 
-    function duplicateAllValues(){
+    function duplicateAllValues() {
         _setEvPlugged(evPlugged);
         _setEvReady(evReady);
         _setEvseReady(evseReady);
@@ -115,14 +117,14 @@ export default function EvseControlPanel(props){
     return <div>
         <div class={`is-row is-stack-20`} >
             <div class="is-col">
-                <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
+                <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={() => { fetchValues() }} >
                     Evse
                 </FetchButton>
             </div>
         </div>
         {
             fetchError != ""
-            && 
+            &&
             <div class="alert is-error">
                 <IForbidden />
                 {fetchError}
@@ -130,7 +132,7 @@ export default function EvseControlPanel(props){
         }
         {
             fetchSuccess != ""
-            && 
+            &&
             <div class="alert is-success">
                 <ICheck />
                 {fetchSuccess}
@@ -139,10 +141,10 @@ export default function EvseControlPanel(props){
         {
             showTable &&
             HtmlBuilder.simpleTable([
-                ["EV Plugged", <div class="label">{evPlugged?"Yes":"No"}</div>],
-                ["EV Ready", <div class="label">{evReady?"Yes":"No"}</div>],
-                ["EVSE Ready", <div class="label">{evseReady?"Yes":"No"}</div>],
-                ["Charge Point Status", chargePointStatus]
+                ["EV Plugged", <div class={`label ${evPlugged ? "is-focus" : "is-warning"}`}>{evPlugged ? "True" : "False"}</div>],
+                ["EV Ready", <div class={`label ${evReady ? "is-focus" : "is-warning"}`}>{evReady ? "True" : "False"}</div>],
+                ["EVSE Ready", <div class={`label ${evseReady ? "is-focus" : "is-warning"}`}>{evseReady ? "True" : "False"}</div>],
+                ["Charge Point Status", <div class="label">{chargePointStatus}</div>]
             ])
         }
         {
@@ -161,21 +163,21 @@ export default function EvseControlPanel(props){
                 <div class="is-col">
                     <div class="is-row is-stack-20">
                         <div class="is-col">
-                            <button class={`button space-right ${(posting)?"is-loading":"pad-icon"}`} type="button" onClick={()=>postValues()}>
+                            <button class={`button space-right ${(posting) ? "is-loading" : "pad-icon"}`} type="button" onClick={() => postValues()}>
                                 {
                                     !posting && <IUpload />
                                 }
                                 Update Evse
                             </button>
-                            <button class="button is-tertiary pad-icon" type="button" onClick={()=>duplicateAllValues()}>
+                            <button class="button is-tertiary pad-icon" type="button" onClick={() => duplicateAllValues()}>
                                 <ICopy />
-                                Insert all values 
+                                Insert all values
                             </button>
                         </div>
                     </div>
                     {
                         postError != ""
-                        && 
+                        &&
                         <div class="alert is-error">
                             <IForbidden />
                             {postError}
@@ -183,34 +185,55 @@ export default function EvseControlPanel(props){
                     }
                     {
                         postSuccess != ""
-                        && 
+                        &&
                         <div class="alert is-success">
                             <ICheck />
                             {postSuccess}
                         </div>
                     }
-                    <div class="is-row is-stack-8">
+                    <div class="is-row is-stack-12">
                         <div class="is-col align-center">
                             <label>EV Plugged</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="evPlugged" value={_evPlugged} onChange={e=>_setEvPlugged(e.target.value)} />
+                            <ButtonGroup buttons={[{
+                                "name": <Fragment><ICheck/>EV plugged</Fragment>,
+                                "value": true
+                            },
+                            {
+                                "name": <Fragment><IForbidden />EV not plugged</Fragment>,
+                                "value": false
+                            }]} selected={_evPlugged} onChange={value => _setEvPlugged(value)} />
                         </div>
                     </div>
-                    <div class="is-row is-stack-8">
+                    <div class="is-row is-stack-12">
                         <div class="is-col align-center">
                             <label>EV Ready</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="evReady" value={_evReady} onChange={e=>_setEvReady(e.target.value)} />
+                            <ButtonGroup buttons={[{
+                                "name": <Fragment><ICheck />EV ready</Fragment>,
+                                "value": true
+                            },
+                            {
+                                "name": <Fragment><IForbidden />EV not ready</Fragment>,
+                                "value": false
+                            }]} selected={_evReady} onChange={value => _setEvReady(value)} />
                         </div>
                     </div>
-                    <div class="is-row is-stack-8">
+                    <div class="is-row is-stack-12">
                         <div class="is-col align-center">
                             <label>EVSE Ready</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="evseReady" value={_evseReady} onChange={e=>_setEvseReady(e.target.value)}/>
+                            <ButtonGroup buttons={[{
+                                "name": <Fragment><ICheck/>EVSE ready</Fragment>,
+                                "value": true
+                            },
+                            {
+                                "name": <Fragment><IForbidden />EVSE not ready</Fragment>,
+                                "value": false
+                            }]} selected={_evseReady} onChange={value => _setEvseReady(value)} />
                         </div>
                     </div>
                 </div>

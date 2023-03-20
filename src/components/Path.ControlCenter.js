@@ -130,7 +130,7 @@ export default function ControlCenter(props){
                     }
                     {
                         showTabs &&
-                        <div class="is-row is-stack-20">
+                        <div class="is-row is-stack-4">
                             <div class="is-col">
                                 {_buildConnectorTabs()}
                             </div>

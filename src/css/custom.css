@@ -52,3 +52,6 @@ td svg{
 .space-right{
     margin-right: 28px;
 }
+.is-padded-16{
+    padding: 16px;
+}

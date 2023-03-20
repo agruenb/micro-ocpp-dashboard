@@ -531,7 +531,7 @@ pre {
 
 fieldset,
 figure pre {
-    border: 1px solid var(--muted-border-color)
+    border: 1px solid var(--muted-border-color);
 }
 
 pre code {
@@ -2884,7 +2884,7 @@ fieldset>.form-item:last-child {
 }
 
 .is-shadow-1 {
-    box-shadow: 0 1px 3px rgba(17, 17, 19, .15)
+    box-shadow: 0 1px 4px rgba(17, 17, 19, .3)
 }
 
 .is-shadow-2 {
@@ -2896,15 +2896,15 @@ fieldset>.form-item:last-child {
 }
 
 .is-border {
-    border: 1px solid rgba(17, 17, 19, .07)
+    border: 1px solid var(--muted-border-color);
 }
 
 .is-border-top {
-    border-top: 1px solid rgba(17, 17, 19, .07)
+    border-top: 1px solid var(--muted-border-color);
 }
 
 .is-border-bottom {
-    border-bottom: 1px solid rgba(17, 17, 19, .07)
+    border-bottom: 1px solid var(--muted-border-color);
 }
 
 .is-border-radius {
