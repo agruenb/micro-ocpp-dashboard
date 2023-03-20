@@ -19,7 +19,10 @@ module.exports = {
         rules: [
             {
                 test: /\.m?js$/,
-                exclude: /(node_modules)/,
+                exclude: [
+                    path.resolve(__dirname, 'node_modules'),
+                    path.resolve(__dirname, 'deploy'),
+                    path.resolve(__dirname, 'dist')],
                 use: {
                     loader: 'babel-loader',
                     options: {
