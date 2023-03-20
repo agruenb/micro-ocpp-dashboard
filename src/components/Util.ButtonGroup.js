@@ -9,10 +9,10 @@ export default function ButtonGroup(props) {
         for (let i = 0; i < props.buttons.length; i++) {
             let buttonItem = props.buttons[i];
             //if button is not selected add secondary class
-            let className = `button is-small ${(props.selected == buttonItem.value)?"":"is-secondary"}`;
+            let className = `button is-small pad-icon ${(props.selected == buttonItem.value)?"":"is-secondary"}`;
             //construct button element
             btnElements.push(
-                <button class={className} type="button" onClick={(() => {props.onSelect(buttonItem.value)})}>
+                <button class={className} type="button" onClick={(() => {props.onChange(buttonItem.value)})}>
                     {buttonItem.name}
                 </button>
             );

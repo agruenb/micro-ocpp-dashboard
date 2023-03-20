@@ -213,10 +213,10 @@ export default class EvseController extends Component {
                     <div class="is-col is-stack-20">
                         <span class="is-row is-stack-8">EV SIMULATOR</span>
                         <div class="is-row is-stack-8">
-                            <ButtonGroup buttons={evsePlugged} selected={state.evPlugged} onSelect={updatePlugged}></ButtonGroup>
+                            <ButtonGroup buttons={evsePlugged} selected={state.evPlugged} onChange={updatePlugged}></ButtonGroup>
                         </div>
                         <div class="is-row is-stack-20">
-                            <ButtonGroup buttons={evseReady} selected={state.evReady} onSelect={updateReady}></ButtonGroup>
+                            <ButtonGroup buttons={evseReady} selected={state.evReady} onChange={updateReady}></ButtonGroup>
                         </div>
                         <span class="is-row is-stack-8">NFC READER</span>
                         <div class="is-row is-stack-20">
