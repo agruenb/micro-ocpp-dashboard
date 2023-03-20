@@ -2,7 +2,7 @@ import { h } from "preact";
 
 import DataService from "../DataService";
 
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder.js";
 import OpenButton from "./Util.OpenButton";
@@ -32,6 +32,13 @@ export default function TransactionControlPanel(props){
     const [authorizationStatus, setAuthorizationStatus] = useState("");
 
     const [_idTag, _setIdTag] = useState("");
+
+    useEffect(()=>{
+        if(props.autofetch){
+            fetchValues();
+        }
+    },
+    [props.autofetch]);
 
     function fetchValues(){
         if(fetching) return;

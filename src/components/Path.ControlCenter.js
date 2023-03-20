@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import DataService from "../DataService";
 
 import WebsocketControlPanel from "./Gui.WebsocketControlPanel";
@@ -15,6 +15,8 @@ import ConnectorControlPanel from "./Gui.ConnectorControlPanel";
 
 export default function ControlCenter(props){
 
+    const [fetchAll, setFetchAll] = useState(0);
+
     const [fetchStart, setFetchStart] = useState(undefined);
     const [fetchStop, setFetchStop] = useState(undefined);
     const [fetching, setFetching] = useState(false);
@@ -25,6 +27,13 @@ export default function ControlCenter(props){
     const [showTabs, setShowTabs] = useState(false);
     const [connectorIds, setConnectorIds] = useState([]);
     const [selectedTab, setSelectedTab] = useState(0);
+
+    useEffect(()=>{
+        if(fetchAll){
+            fetchValues();
+        }
+    },
+    [fetchAll]);
 
     function fetchValues(){
         if(fetching) return;
@@ -69,7 +78,7 @@ export default function ControlCenter(props){
         let connectorPanels = [];
         for(let i = 0; i < connectorIds.length; i++){
             connectorPanels.push(
-                <ConnectorControlPanel connectorId={connectorIds[i]} display={(i === selectedTab)} />
+                <ConnectorControlPanel connectorId={connectorIds[i]} display={(i === selectedTab)} autofetch={fetchAll} />
             )
         }
         return connectorPanels
@@ -81,7 +90,7 @@ export default function ControlCenter(props){
             <div class="is-col">
                 <div class="is-row is-stack-40">
                     <div class="is-col">
-                        <button class="button is-tertiary pad-icon space-right">
+                        <button class="button is-tertiary pad-icon space-right" onClick={()=>{setFetchAll(fetchAll+1)}}>
                             <IDownload />
                             Fetch All
                         </button>
@@ -91,8 +100,8 @@ export default function ControlCenter(props){
                         </button>
                     </div>
                 </div>
-                <WebsocketControlPanel />
-                <StationControlPanel />
+                <WebsocketControlPanel autofetch={fetchAll} />
+                <StationControlPanel autofetch={fetchAll} />
                 <fieldset class="is-col">
                     <legend>Connectors</legend>
                     <div class={`is-row ${showTabs?"is-stack-20":""}`}>

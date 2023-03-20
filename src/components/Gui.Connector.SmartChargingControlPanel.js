@@ -2,7 +2,7 @@ import { h } from "preact";
 
 import DataService from "../DataService";
 
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder.js";
 
@@ -21,6 +21,13 @@ export default function SmartChargingControlPanel(props){
 
     const [maxPower, setMaxPower] = useState(-1);
     const [maxCurrent, setMaxCurrent] = useState(-1);
+
+    useEffect(()=>{
+        if(props.autofetch){
+            fetchValues();
+        }
+    },
+    [props.autofetch]);
 
     function fetchValues(){
         if(fetching) return;

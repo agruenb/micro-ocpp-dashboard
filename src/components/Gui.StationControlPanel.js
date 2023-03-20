@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import DataService from "../DataService";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder";
@@ -37,6 +37,13 @@ export default function StationControlPanel(props) {
     const [_chargePointSerialNumber, _setChargePointSerialNumber] = useState();
     const [_chargePointVendor, _setChargePointVendor] = useState();
     const [_firmwareVersion, _setFirmwareVersion] = useState();
+
+    useEffect(()=>{
+        if(props.autofetch){
+            fetchValues();
+        }
+    },
+    [props.autofetch]);
 
     function fetchValues(){
         if(fetching) return;

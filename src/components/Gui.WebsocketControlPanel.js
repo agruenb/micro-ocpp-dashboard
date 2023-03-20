@@ -1,16 +1,16 @@
 import { h } from "preact";
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import DataService from "../DataService";
-import StyleBuilder from "../StyleBuilder";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder";
 
-import ICaretDown from "./icons/ICaretDown.svg";
 import ICheck from "./icons/ICheck.svg";
 import ICopy from "./icons/ICopy.svg";
 import IForbidden from "./icons/IForbidden.svg";
 import ITrash from "./icons/ITrash.svg";
 import IUpload from "./icons/IUpload.svg";
+import OpenButton from "./Util.OpenButton";
+import DateFormatter from "../DateFormatter";
 
 export default function WebsocketControlPanel(props) {
 
@@ -44,6 +44,13 @@ export default function WebsocketControlPanel(props) {
     const [_reconnectInterval, _setReconnectInterval] = useState(-1);
     const [_dnsUrl, _setDnsUrl] = useState("");
 
+    useEffect(()=>{
+        if(props.autofetch){
+            fetchValues();
+        }
+    },
+    [props.autofetch]);
+
     function fetchValues(){
         if(fetching) return;
         setFetchStart(new Date());
@@ -52,7 +59,7 @@ export default function WebsocketControlPanel(props) {
         DataService.get("/websocket").then(
             resp => {
                 setFetchError("");
-                setFetchSuccess("Successfully fetched websocket data (" + (new Date()).toISOString() + ")");//TODO updated ago
+                setFetchSuccess("Successfully fetched websocket data (" + DateFormatter.fullDate(new Date()) + ")");
                 setBackendUrl(resp.backendUrl);
                 setChargeBoxId(resp.chargeBoxId);
                 setAuthorizationKey(resp.authorizationKey);
@@ -176,10 +183,9 @@ export default function WebsocketControlPanel(props) {
             showTable &&
             <div class={`is-row ${showInputs?"is-stack-20":""}`}>
                 <div class="is-col">
-                    <button type="button" class="button is-tertiary pad-icon" onClick={() => { setShowInputs(!showInputs) }}>
-                        <ICaretDown style={`${(showInputs ? "" : StyleBuilder.rotate("-90"))}transition:0.2s;`} />
+                    <OpenButton isOpen={showInputs} onClick={() => { setShowInputs(!showInputs) }}>
                         Websocket Options
-                    </button>
+                    </OpenButton>
                 </div>
             </div>
         }
