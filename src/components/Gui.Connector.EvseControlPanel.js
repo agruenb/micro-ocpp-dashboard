@@ -1,99 +1,95 @@
 import { h } from "preact";
-import { useState } from "preact/hooks";
-import DataService from "../DataService";
-import FetchButton from "./Util.FetchButton";
-import HtmlBuilder from "../HtmlBuilder";
 
-import ICheck from "./icons/ICheck.svg";
-import ICopy from "./icons/ICopy.svg";
-import IForbidden from "./icons/IForbidden.svg";
-import ITrash from "./icons/ITrash.svg";
-import IUpload from "./icons/IUpload.svg";
+import DataService from "../DataService";
+
+import { useState } from "preact/hooks";
+import FetchButton from "./Util.FetchButton";
+import HtmlBuilder from "../HtmlBuilder.js";
 import OpenButton from "./Util.OpenButton";
 
+import ICheck from "./icons/ICheck.svg";
+import IForbidden from "./icons/IForbidden.svg";
+import IUpload from "./icons/IUpload.svg";
+import ICopy from "./icons/ICopy.svg";
 
-export default function StationControlPanel(props) {
+export default function EvseControlPanel(props){
 
     const [fetchStart, setFetchStart] = useState(undefined);
     const [fetchStop, setFetchStop] = useState(undefined);
     const [fetching, setFetching] = useState(false);
-    const [posting, setPosting] = useState(false);
-
-    const [fetchError, setFetchError] = useState("");
     const [fetchSuccess, setFetchSuccess] = useState("");
-
-    const [postError, setPostError] = useState("");
-    const [postSuccess, setPostSuccess] = useState("");
+    const [fetchError, setFetchError] = useState("");
 
     const [showTable, setShowTable] = useState(false);
     const [showInputs, setShowInputs] = useState(false);
 
-    const [chargePointModel, setChargePointModel] = useState();
-    const [chargePointSerialNumber, setChargePointSerialNumber] = useState();
-    const [chargePointVendor, setChargePointVendor] = useState();
-    const [firmwareVersion, setFirmwareVersion] = useState();
+    const [posting, setPosting] = useState(false);
+    const [postError, setPostError] = useState("");
+    const [postSuccess, setPostSuccess] = useState("");
 
-    const [_chargePointModel, _setChargePointModel] = useState();
-    const [_chargePointSerialNumber, _setChargePointSerialNumber] = useState();
-    const [_chargePointVendor, _setChargePointVendor] = useState();
-    const [_firmwareVersion, _setFirmwareVersion] = useState();
+    const [evPlugged, setEvPlugged] = useState(false);
+    const [evReady, setEvReady] = useState(false);
+    const [evseReady, setEvseReady] = useState(false);
+    const [chargePointStatus, setChargePointStatus] = useState("");
+
+    const [_evPlugged, _setEvPlugged] = useState(false);
+    const [_evReady, _setEvReady] = useState(false);
+    const [_evseReady, _setEvseReady] = useState(false);
 
     function fetchValues(){
         if(fetching) return;
         setFetchStart(new Date());
         setFetchStop(undefined);
         setFetching(true);
-        DataService.get("/station").then(
+        DataService.get("/connector/" + props.connectorId +  "/evse").then(
             resp => {
-                setChargePointModel(resp.chargePointModel);
-                setChargePointSerialNumber(resp.chargePointSerialNumber);
-                setChargePointVendor(resp.chargePointVendor);
-                setFirmwareVersion(resp.firmwareVersion);
+                setEvPlugged(resp.evPlugged);
+                setEvReady(resp.evReady);
+                setEvseReady(resp.evseReady);
+                setChargePointStatus(resp.chargePointStatus);
 
                 setFetchError("");
-                setFetchSuccess("Successfully fetched station data (" + (new Date()).toISOString() + ")");//TODO updated ago
+                setFetchSuccess("Successfully fetched evse data (" + (new Date()).toISOString() + ")");//TODO updated ago
                 setShowTable(true);
             }
         ).catch(
             e => {
                 setFetchSuccess("");
-                setFetchError("Unable to fetch station");
+                setFetchError("Unable to fetch evse");
             }
         ).finally(
             () => {
                 setFetchStop(new Date());
                 setFetching(false);
             }
-        )
+        );
     }
 
     function postValues(){
         if(posting) return;
         setPosting(true);
-        DataService.post("/station", {
-            chargePointModel: _chargePointModel,
-            chargePointSerialNumber: _chargePointSerialNumber,
-            chargePointVendor: _chargePointVendor,
-            firmwareVersion: _firmwareVersion
+        DataService.post("/connector/" + props.connectorId + "/evse", {
+            evPlugged: _evPlugged,
+            evReady: _evReady,
+            evseReady: _evseReady
         }).then(
             resp => {
                 if(
-                    resp.chargePointModel === _chargePointModel &&
-                    resp.chargePointSerialNumber === _chargePointSerialNumber &&
-                    resp.chargePointVendor === _chargePointVendor &&
-                    resp.firmwareVersion === _firmwareVersion
+                    resp.evPlugged === _evPlugged &&
+                    resp.evReady === _evReady &&
+                    resp.evseReady === _evseReady
                 ){
-                    setPostSuccess("Station update confirmed by the server (" + (new Date()).toISOString() + ")");
+                    setPostSuccess("Evse update confirmed by the server (" + (new Date()).toISOString() + ")");
                     setPostError("");
                 }else{
                     setPostSuccess("");
-                    setPostError("Error while confirming update - You should re-fetch the station");
+                    setPostError("Error while confirming update - You should re-fetch the evse");
                 }
             }
         ).catch(
             e => {
                 setPostSuccess("");
-                setPostError("Unable to fetch station");
+                setPostError("Unable to fetch evse");
             }
         ).finally(
             () => {
@@ -103,24 +99,16 @@ export default function StationControlPanel(props) {
     }
 
     function duplicateAllValues(){
-        _setChargePointModel(chargePointModel);
-        _setChargePointSerialNumber(chargePointSerialNumber);
-        _setChargePointVendor(chargePointVendor);
-        _setFirmwareVersion(firmwareVersion);
-    }
-    function clearAllValues(){
-        _setChargePointModel("");
-        _setChargePointSerialNumber("");
-        _setChargePointVendor("");
-        _setFirmwareVersion("");
+        _setEvPlugged(evPlugged);
+        _setEvReady(evReady);
+        _setEvseReady(evseReady);
     }
 
-    return <fieldset class="is-col">
-        <legend>Station</legend>
-        <div class={`is-row ${showTable?"is-stack-20":""}`}>
+    return <div>
+        <div class={`is-row is-stack-20`} >
             <div class="is-col">
                 <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
-                    Fetch Station
+                    Evse
                 </FetchButton>
             </div>
         </div>
@@ -143,18 +131,18 @@ export default function StationControlPanel(props) {
         {
             showTable &&
             HtmlBuilder.simpleTable([
-                ["Charge Point Model", <b>{chargePointModel}</b>],
-                ["Charge Point Serial Number", <b>{chargePointSerialNumber}</b>],
-                ["Charge Point Vendor", <b>{chargePointVendor}</b>],
-                ["Firmware Version", <b>{firmwareVersion}</b>]
+                ["EV Plugged", <div class="label">{evPlugged?"Yes":"No"}</div>],
+                ["EV Ready", <div class="label">{evReady?"Yes":"No"}</div>],
+                ["EVSE Ready", <div class="label">{evseReady?"Yes":"No"}</div>],
+                ["Charge Point Status", chargePointStatus]
             ])
         }
         {
             showTable &&
-            <div class={`is-row ${showInputs?"is-stack-20":""}`}>
+            <div class={`is-row is-stack-20`}>
                 <div class="is-col">
                     <OpenButton isOpen={showInputs} onClick={() => { setShowInputs(!showInputs) }}>
-                        Station Options
+                        EVSE Options
                     </OpenButton>
                 </div>
             </div>
@@ -169,11 +157,7 @@ export default function StationControlPanel(props) {
                                 {
                                     !posting && <IUpload />
                                 }
-                                Update Station
-                            </button>
-                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>clearAllValues()}>
-                                <ITrash />
-                                Clear all
+                                Update Evse
                             </button>
                             <button class="button is-tertiary pad-icon" type="button" onClick={()=>duplicateAllValues()}>
                                 <ICopy />
@@ -199,38 +183,30 @@ export default function StationControlPanel(props) {
                     }
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
-                            <label>Charge Point Model</label>
+                            <label>EV Plugged</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="chargePointModel" value={_chargePointModel} onChange={e=>_setChargePointModel(e.target.value)} />
+                            <input type="text" placeholder="evPlugged" value={_evPlugged} onChange={e=>_setEvPlugged(e.target.value)} />
                         </div>
                     </div>
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
-                            <label>Charge Point Serial Number</label>
+                            <label>EV Ready</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="chargePointSerialNumber" value={_chargePointSerialNumber} onChange={e=>_setChargePointSerialNumber(e.target.value)} />
+                            <input type="text" placeholder="evReady" value={_evReady} onChange={e=>_setEvReady(e.target.value)} />
                         </div>
                     </div>
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
-                            <label>Charge Point Vendor</label>
+                            <label>EVSE Ready</label>
                         </div>
                         <div class="is-col">
-                            <input type="text" placeholder="chargePointVendor" value={_chargePointVendor} onChange={e=>_setChargePointVendor(e.target.value)}/>
-                        </div>
-                    </div>
-                    <div class="is-row">
-                        <div class="is-col align-center">
-                            <label>Firmware Version</label>
-                        </div>
-                        <div class="is-col">
-                            <input type="text" placeholder="firmwareVersion" value={_firmwareVersion} onChange={e=>_setFirmwareVersion(e.target.value)}/>
+                            <input type="text" placeholder="evseReady" value={_evseReady} onChange={e=>_setEvseReady(e.target.value)}/>
                         </div>
                     </div>
                 </div>
             </div>
         }
-    </fieldset>;
+    </div>
 }
