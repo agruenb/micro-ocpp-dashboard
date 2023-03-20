@@ -59,7 +59,7 @@ export default function WebsocketControlPanel(props) {
         DataService.get("/websocket").then(
             resp => {
                 setFetchError("");
-                setFetchSuccess("Successfully fetched websocket data (" + DateFormatter.fullDate(new Date()) + ")");
+                setFetchSuccess(`Successfully fetched websocket data - ${DateFormatter.fullDate(new Date())}`);
                 setBackendUrl(resp.backendUrl);
                 setChargeBoxId(resp.chargeBoxId);
                 setAuthorizationKey(resp.authorizationKey);
@@ -104,7 +104,7 @@ export default function WebsocketControlPanel(props) {
                     resp.reconnectingInterval === _reconnectInterval &&
                     resp.dnsUrl === _dnsUrl
                 ){
-                    setPostSuccess("Websocket update confirmed by the server (" + (new Date()).toISOString() + ")");
+                    setPostSuccess(`Websocket update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
                     setPostError("");
                 }else{
                     setPostSuccess("");
@@ -144,10 +144,10 @@ export default function WebsocketControlPanel(props) {
 
     return <fieldset class="is-col">
         <legend>Websocket</legend>
-        <div class={`is-row ${showTable?"is-stack-20":""}`}>
+        <div class={`is-row ${(showTable || fetchError !== "")?"is-stack-20":""}`}>
             <div class="is-col">
                 <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
-                    Fetch Websocket
+                    Websocket
                 </FetchButton>
             </div>
         </div>

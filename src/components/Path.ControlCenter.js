@@ -1,6 +1,7 @@
 import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import DataService from "../DataService";
+import DateFormatter from "../DateFormatter";
 
 import WebsocketControlPanel from "./Gui.WebsocketControlPanel";
 import StationControlPanel from "./Gui.StationControlPanel";
@@ -46,7 +47,7 @@ export default function ControlCenter(props){
                 setConnectorIds(resp);
 
                 setFetchError("");
-                setFetchSuccess("Successfully fetched connector list (" + (new Date()).toISOString() + ")");//TODO updated ago
+                setFetchSuccess(`Successfully fetched connector list - ${DateFormatter.fullDate(new Date())}`);
                 setShowTabs(true);
             }
         ).catch(
@@ -104,10 +105,10 @@ export default function ControlCenter(props){
                 <StationControlPanel autofetch={fetchAll} />
                 <fieldset class="is-col">
                     <legend>Connectors</legend>
-                    <div class={`is-row ${showTabs?"is-stack-20":""}`}>
+                    <div class={`is-row ${(showTabs || fetchError !== "")?"is-stack-20":""}`}>
                         <div class="is-col">
                             <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
-                                Fetch Connectors
+                                Connectors
                             </FetchButton>
                         </div>
                     </div>

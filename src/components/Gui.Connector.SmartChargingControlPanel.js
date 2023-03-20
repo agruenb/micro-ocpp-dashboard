@@ -5,6 +5,7 @@ import DataService from "../DataService";
 import { useEffect, useState } from "preact/hooks";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder.js";
+import DateFormatter from "../DateFormatter";
 
 import ICheck from "./icons/ICheck.svg";
 import IForbidden from "./icons/IForbidden.svg";
@@ -40,7 +41,7 @@ export default function SmartChargingControlPanel(props){
                 setMaxCurrent(resp.maxCurrent);
 
                 setFetchError("");
-                setFetchSuccess("Successfully fetched smartcharging data (" + (new Date()).toISOString() + ")");//TODO updated ago
+                setFetchSuccess(`Successfully fetched smartcharging data - ${DateFormatter.fullDate(new Date())}`);
                 setShowTable(true);
             }
         ).catch(

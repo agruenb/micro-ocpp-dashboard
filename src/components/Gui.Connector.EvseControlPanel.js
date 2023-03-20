@@ -6,6 +6,7 @@ import { useEffect, useState } from "preact/hooks";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder.js";
 import OpenButton from "./Util.OpenButton";
+import DateFormatter from "../DateFormatter";
 
 import ICheck from "./icons/ICheck.svg";
 import IForbidden from "./icons/IForbidden.svg";
@@ -56,7 +57,7 @@ export default function EvseControlPanel(props){
                 setChargePointStatus(resp.chargePointStatus);
 
                 setFetchError("");
-                setFetchSuccess("Successfully fetched evse data (" + (new Date()).toISOString() + ")");//TODO updated ago
+                setFetchSuccess(`Successfully fetched evse data - ${DateFormatter.fullDate(new Date())}`);
                 setShowTable(true);
             }
         ).catch(
@@ -86,7 +87,7 @@ export default function EvseControlPanel(props){
                     resp.evReady === _evReady &&
                     resp.evseReady === _evseReady
                 ){
-                    setPostSuccess("Evse update confirmed by the server (" + (new Date()).toISOString() + ")");
+                    setPostSuccess(`Evse update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
                     setPostError("");
                 }else{
                     setPostSuccess("");

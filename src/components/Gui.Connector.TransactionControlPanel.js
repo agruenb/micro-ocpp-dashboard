@@ -6,6 +6,7 @@ import { useEffect, useState } from "preact/hooks";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder.js";
 import OpenButton from "./Util.OpenButton";
+import DateFormatter from "../DateFormatter";
 
 import ICheck from "./icons/ICheck.svg";
 import IForbidden from "./icons/IForbidden.svg";
@@ -52,7 +53,7 @@ export default function TransactionControlPanel(props){
                 setAuthorizationStatus(resp.authorizationStatus);
 
                 setFetchError("");
-                setFetchSuccess("Successfully fetched transaction data (" + (new Date()).toISOString() + ")");//TODO updated ago
+                setFetchSuccess(`Successfully fetched transaction data - ${DateFormatter.fullDate(new Date())}`);
                 setShowTable(true);
             }
         ).catch(
@@ -78,7 +79,7 @@ export default function TransactionControlPanel(props){
                 if(
                     resp.idTag === _idTag
                 ){
-                    setPostSuccess("Transaction update confirmed by the server (" + (new Date()).toISOString() + ")");
+                    setPostSuccess(`Transaction update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
                     setPostError("");
                 }else{
                     setPostSuccess("");

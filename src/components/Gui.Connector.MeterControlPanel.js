@@ -5,6 +5,7 @@ import DataService from "../DataService";
 import { useEffect, useState } from "preact/hooks";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder.js";
+import DateFormatter from "../DateFormatter";
 
 import ICheck from "./icons/ICheck.svg";
 import IForbidden from "./icons/IForbidden.svg";
@@ -45,7 +46,7 @@ export default function MeterControlPanel(props){
                 setVoltage(resp.voltage);
 
                 setFetchError("");
-                setFetchSuccess("Successfully fetched meter data (" + (new Date()).toISOString() + ")");//TODO updated ago
+                setFetchSuccess(`Successfully fetched meter data - ${DateFormatter.fullDate(new Date())}`);
                 setShowTable(true);
             }
         ).catch(

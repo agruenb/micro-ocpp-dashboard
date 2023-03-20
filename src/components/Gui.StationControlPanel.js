@@ -3,6 +3,7 @@ import { useEffect, useState } from "preact/hooks";
 import DataService from "../DataService";
 import FetchButton from "./Util.FetchButton";
 import HtmlBuilder from "../HtmlBuilder";
+import DateFormatter from "../DateFormatter";
 
 import ICheck from "./icons/ICheck.svg";
 import ICopy from "./icons/ICopy.svg";
@@ -58,7 +59,7 @@ export default function StationControlPanel(props) {
                 setFirmwareVersion(resp.firmwareVersion);
 
                 setFetchError("");
-                setFetchSuccess("Successfully fetched station data (" + (new Date()).toISOString() + ")");//TODO updated ago
+                setFetchSuccess(`Successfully fetched station data - ${DateFormatter.fullDate(new Date())}`);
                 setShowTable(true);
             }
         ).catch(
@@ -90,7 +91,7 @@ export default function StationControlPanel(props) {
                     resp.chargePointVendor === _chargePointVendor &&
                     resp.firmwareVersion === _firmwareVersion
                 ){
-                    setPostSuccess("Station update confirmed by the server (" + (new Date()).toISOString() + ")");
+                    setPostSuccess(`Station update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
                     setPostError("");
                 }else{
                     setPostSuccess("");
@@ -124,10 +125,10 @@ export default function StationControlPanel(props) {
 
     return <fieldset class="is-col">
         <legend>Station</legend>
-        <div class={`is-row ${showTable?"is-stack-20":""}`}>
+        <div class={`is-row ${(showTable || fetchError !== "")?"is-stack-20":""}`}>
             <div class="is-col">
                 <FetchButton fetching={fetching} fetchSuccess={fetchSuccess} fetchStart={fetchStart} fetchStop={fetchStop} onClick={()=>{fetchValues()}} >
-                    Fetch Station
+                    Station
                 </FetchButton>
             </div>
         </div>
