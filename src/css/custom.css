@@ -5,21 +5,33 @@
     user-select: none;
     cursor: pointer;
 }
+.hide{
+    display:none;
+}
 .divider{
     width:90%;
     margin: 10px auto;
     height:1.5px;
     background:var(--divider);
 }
-.button .pad-icon svg{
+.button .pad-icon svg, .button.pad-icon svg{
     margin-right:10px;
 }
 td svg{
     margin-right:10px;
     vertical-align: bottom;
+    font-size:1.3em;
 }
 .label svg{
     vertical-align: text-top;
+    font-size: 1.2em;
+    padding: 2px;
+    margin-right: 3px;
+}
+.alert svg{
+    margin-right:16px;
+    vertical-align: top;
+    font-size:1.3em;
 }
 .align-center{
     display:flex;
@@ -36,4 +48,15 @@ td svg{
 }
 .v-align-mid{
     vertical-align: middle;
+}
+.space-right{
+    margin-right: 28px;
+}
+.is-padded-16{
+    padding: 16px;
+}
+@media only screen and (max-width:767px) {
+    .space-right{
+        margin: 0 28px 14px 0;
+    }
 }

@@ -1,14 +1,18 @@
+import "./component_styles/sidebar.css";
+
 import { h, Component } from "preact";
 
 import SidebarItem from "./Layout.SidebarItem.js";
-import IHome from "./icons/IHome.js";
-import IWifi from "./icons/IWifi.js";
-import ILock from "./icons/ILock.js";
-import IArrowOut from "./icons/IArrowOut.js";
-import IMatthLogo from "./icons/IMatthLogo.js";
-import IServer from "./icons/IServer.js";
-import IProcessor from "./icons/IProcessor.js";
-import IMonitor from "./icons/IMonitor.js";
+import IEvse from "./icons/IEvse.svg";
+import IWifi from "./icons/IWifi.svg";
+import ILock from "./icons/ILock.svg";
+import IArrowOut from "./icons/IArrowOut.svg";
+import IMatthLogo from "./icons/IMatthLogo.svg";
+import IServer from "./icons/IServer.svg";
+import IProcessor from "./icons/IProcessor.svg";
+import IMonitor from "./icons/IMonitor.svg";
+import IControls from "./icons/IControls.svg";
+
 
 export default class Sidebar extends Component{
     
@@ -20,35 +24,47 @@ export default class Sidebar extends Component{
         return (
             <aside class="sidebar">
                 <div class="sb-header">
-                    <IMatthLogo size="50"></IMatthLogo>
-                    <div>Arduino Ocpp</div>
+                    <IMatthLogo></IMatthLogo>
+                    <div>ArduinoOcpp</div>
                 </div>
                 <div class="divider" />
+                <SidebarItem route="controlcenter" nav={props.nav}>
+                    <IControls />
+                    <span>Control Center</span>
+                </SidebarItem>
+                <SidebarItem route="evse" nav={props.nav}>
+                    <IEvse />
+                    <span>EVSE</span>
+                </SidebarItem>
                 <SidebarItem route="network" nav={props.nav}>
-                    <IWifi size="24" stroke="#ffffff" />
-                    Network
+                    <IWifi />
+                    <span>Network</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="ocpp" nav={props.nav}>
-                    <IServer size="24" stroke="#ffffff" />
-                    OCCP 1.6
-                    {props.nav.path}
+                    <IServer />
+                    <span>OCPP 1.6</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="security" nav={props.nav}>
                     <ILock size="24" />
-                    Security
+                    <span>Security</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="about" nav={props.nav}>
-                    <IProcessor size="24" stroke="#ffffff" />
-                    Controller
+                    <IProcessor />
+                    <span>Controller</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="other" nav={props.nav}>
-                    <IMonitor size="24" stroke="#ffffff" />
-                    Devices
+                    <IMonitor />
+                    <span>Devices</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <div class="divider" />
                 <SidebarItem route="logout" nav={props.nav}>
-                    <IArrowOut size="24" />
-                    Logout
+                    <IArrowOut/>
+                    <span>Logout</span>
                 </SidebarItem>
             </aside>
         )

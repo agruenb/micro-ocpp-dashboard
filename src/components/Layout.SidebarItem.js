@@ -18,12 +18,20 @@ export default class SidebarItem extends Component{
         return(
             <a href="#" class={this.class()} onClick={(e)=>{this.setPath(e, props)}}>
                 <div class="sb-content">
-                    <div class="icon">
-                        {props.children[0]}
+                    <div class="main">
+                        <div class="icon">
+                            {props.children[0]}
+                        </div>
+                        <div class="txt">
+                            {props.children[1]}
+                        </div>
                     </div>
-                    <div class="txt">
-                        {props.children[1]}
-                    </div>
+                    {
+                        props.children[2] &&
+                        <div class="txt sec">
+                            {props.children[2]}
+                        </div>
+                    }
                 </div>
             </a>
         )

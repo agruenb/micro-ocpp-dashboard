@@ -11,19 +11,25 @@
 <body>
     <main style="padding:26px">
         <div class="is-row is-stack-20">
-            <nav class="breadcrumb">
-                <a href="">Home</a>
-                <a>Menu</a>
-                <span>Page</span>
-            </nav>
+            <div class="is-col">
+                <nav class="breadcrumb">
+                    <a href="">Home</a>
+                    <a href="">Menu</a>
+                    <span>KubeCSS class showcase</span>
+                </nav>
+            </div>
         </div>
-        <h1>Kube design Test Page</h1>
-        <h3>Sub-heading</h3>
-        <div class="is-row is-stack-20">
-            <div class="alert is-col is-focus">This is an info!</div>
-        </div>
-        <div class="is-row is-stack-20">
-            <div class="alert is-col is-error">This is an error!</div>
+        <h1>Header 1</h1>
+        <h2>Header 2</h2>
+        <h3>Header 3</h3>
+        <h4>Header 4</h4>
+        <h5>Header 5</h5>
+        <h6>Header 6</h6>
+        <div class="is-row is-stack-10">
+            <div class="alert is-col is-success">This is a success alert!</div>
+            <div class="alert is-col is-error">This is an error alert!</div>
+            <div class="alert is-col is-focus">This is an focus alert!</div>
+            <div class="alert is-col">This is a default alert!</div>
         </div>
         <div class="is-col is-stack-20">
             <button class="button">Button</button>
@@ -61,11 +67,13 @@
             
                 <div class="form-item">
                     <label class="is-checkbox"><input type="checkbox"> Check me</label>
-                    <label class="is-checkbox"><input type="radio"> Radio me</label>
+                    <label class="is-checkbox"><input type="radio" name="test"> Radio me</label>
+                    <label class="is-checkbox"><input type="radio" name="test"> Radio me</label>
+                    <label class="is-checkbox"><input type="radio" name="test"> Radio me</label>
                 </div>
             
                 <div class="form-item">
-                    <textarea rows="6"></textarea>
+                    <textarea rows="6" placeholder="This is a text-area"></textarea>
                 </div>
             
                 <div class="form-item is-buttons">
@@ -139,16 +147,24 @@
             </form>
         </div>
         <div class="is-row is-stack-20">
-            <span class="label">Draft</span>
-            <span class="label is-error">Rejected</span>
-            <span class="label is-focus">Status</span>
-            <span class="label is-success is-secondary">Approved</span>
-            <span class="label is-warning is-secondary">Pending</span>
-            <span class="label is-badge">2</span>
+            <div class="is-col">
+                <span class="label">Draft</span>
+                <span class="label is-error">Rejected</span>
+                <span class="label is-focus">Status</span>
+                <span class="label is-success is-secondary">Approved</span>
+                <span class="label is-warning is-secondary">Pending</span>
+                <span class="label is-warning is-tertiary">Pending</span>
+                <span class="label is-tertiary">Default label</span>
+            </div>
+        </div>
+        <div class="is-row is-stack-20">
+            <div class="is-col">
+                <span class="label is-badge">1</span>
             <span class="label is-badge is-error">2</span>
-            <span class="label is-badge is-focus">2</span>
-            <span class="label is-badge is-success">2</span>
-            <span class="label is-badge is-warning">2</span>
+            <span class="label is-badge is-focus">3</span>
+            <span class="label is-badge is-success">4</span>
+            <span class="label is-badge is-warning">5</span>
+            </div>
         </div>
         <div class="is-row is-stack-20">
             <nav class="pager is-col">
@@ -186,19 +202,28 @@
             </table>
         </div>
         <div class="is-row is-stack-20">
-            <nav class="tabs" data-kube="tabs" data-equal="true">
-                <a href="#tab1" class="is-active">Page 1</a>
-                <a href="#tab2">Page 2</a>
-                <a href="#tab3">Page 3</a>
-            </nav>
+            <div class="is-col">
+                <nav class="tabs" data-kube="tabs" data-equal="true">
+                    <a href="#tab1" class="is-active">Page 1</a>
+                    <a href="#tab2">Page 2</a>
+                    <a href="#tab3">Page 3</a>
+                </nav>
+            </div>
         </div>
         <div class="is-row is-stack-20">
-            <blockquote>
-                "asset main.eeb03a98e8c037aa4781.hot-update.js 14.5 KiB [emitted] [immutable] [hmr] (name: main) asset main.eeb03a98e8c037aa4781.hot-update.json 28 bytes [emitted] [immutable] [hmr] Entrypoint main 699 KiB = main.js 685 KiB main.eeb03a98e8c037aa4781.hot-update.js 14.5 KiB"
-            </blockquote>
+            <div class="is-col">
+                <blockquote>
+                    "asset main.eeb03a98e8c037aa4781.hot-update.js 14.5 KiB [emitted] [immutable] [hmr] (name: main) asset main.eeb03a98e8c037aa4781.hot-update.json 28 bytes [emitted] [immutable] [hmr] Entrypoint main 699 KiB = main.js 685 KiB main.eeb03a98e8c037aa4781.hot-update.js 14.5 KiB"
+                </blockquote>
+            </div>
         </div>
-        .message
-        .close
+        <div class="is-row is-stack-20">
+            <div class="is-col">
+                <progress id="file" value="32" max="100" class="kube-progress">
+                    <span>32%</span>
+                </progress >
+            </div>
+        </div>
     </main>
 </body>
 </html>

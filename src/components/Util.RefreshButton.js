@@ -1,5 +1,5 @@
 import { h } from "preact";
-import IArrowRotate from "./icons/IArrorRotate";
+import IArrowRotate from "./icons/IArrorRotate.svg";
 
 
 export default function RefreshButton(props){
@@ -11,7 +11,7 @@ export default function RefreshButton(props){
     return (
         <button class="button is-tertiary" onClick={e=>{doAction(e)}}>
             <div class="pad-icon">
-                <IArrowRotate size="20" stroke="#0c3dd7"></IArrowRotate>
+                <IArrowRotate></IArrowRotate>
             </div>
             {props.children}
         </button>

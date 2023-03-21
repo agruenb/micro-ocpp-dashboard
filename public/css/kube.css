@@ -1509,24 +1509,6 @@ label.is-checkbox.is-large {
     font-size: 1.3125em
 }
 
-form div.is-success,
-form span.is-success {
-    font-size: .75em;
-    color: #20bc71
-}
-
-form div.is-error,
-form span.is-error {
-    font-size: .75em;
-    color: #ee2455
-}
-
-form div.is-warning,
-form span.is-warning {
-    font-size: .75em;
-    color: #ff6951
-}
-
 form .is-desc {
     font-size: .75rem;
     color: var(--muted-color)

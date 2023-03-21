@@ -1,4 +1,7 @@
 import { h } from "preact";
+import SetBackendUrl from "./Gui.SetBackendUrl";
+import SetEvseConnectionDetails from "./Gui.SetEvseConnection";
+import SetSecondaryUrl from "./Gui.SetSecondaryUrl";
 import FullPage from "./Layout.FullPage";
 
 import ButtonGroup from "./Util.ButtonGroup";
@@ -37,19 +40,12 @@ export default function Ocpp() {
 
     return (
         <FullPage>
-            <h2 class="is-stack-40">Ocpp 1.6</h2>
+            <h2 class="is-stack-40">OCPP 1.6</h2>
             <form class="is-stack-40 is-col">
-                <fieldset class="is-col">
-                    <legend>Backend</legend>
-                    <div class="form-item is-col">
-                        <label>
-                            Backend URL
-                            <span class="is-desc">The URL of the backend server</span>
-                        </label>
-                        <textarea rows="4" value="https://localhost:3000/index_dev.html"></textarea>
-                    </div>
-                    <button class="button" type="button">Save</button>
-                </fieldset>
+                <SetBackendUrl />
+            </form>
+            <form class="is-stack-40 is-col">
+                <SetEvseConnectionDetails />
             </form>
             <form class="is-stack-40">
                 <fieldset>
@@ -78,33 +74,7 @@ export default function Ocpp() {
                 </fieldset>
             </form>
             <form class="is-stack-40">
-                <fieldset class="is-col">
-                    <legend>Secondary</legend>
-                    <div class="form-item is-col">
-                        <label>
-                            Secondary URL
-                            <span class="is-desc">The URL of the secondary server</span>
-                        </label>
-                        <textarea rows="4" value="https://localhost:3000/index_dev.html?parameters=none"></textarea>
-                    </div>
-                    <button class="button" type="button">Save</button>
-                </fieldset>
-            </form>
-            <form>
-                <fieldset>
-                    <legend>EVSE connection</legend>
-                    <div class="is-row">
-                        <div class="form-item is-col">
-                            <label>EVSE Name</label>
-                            <input type="text" value="company_wifi_ef3c98" />
-                        </div>
-                        <div class="form-item is-col">
-                            <label>Auth-Key</label>
-                            <input type="password" value="compfi_ef3c98" />
-                        </div>
-                    </div>
-                    <button class="button" type="button">Save</button>
-                </fieldset>
+                <SetSecondaryUrl />
             </form>
         </FullPage>
     )

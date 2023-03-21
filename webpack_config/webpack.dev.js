@@ -1,5 +1,6 @@
 const { merge } = require("webpack-merge");
 const commonConfig = require("./webpack.common");
+const Dotenv = require('dotenv-webpack');
 
 const devConfig = {
     mode: "development",
@@ -7,12 +8,11 @@ const devConfig = {
     devServer: {
         port: 3000,
         historyApiFallback: true,
-        proxy: {
-            "/api": {
-                target: "https://your-api-url",
-                changeOrigin: true,
-            },
-        },
     },
+    plugins:[
+        new Dotenv({
+			path: `./.env.development`
+		})
+    ]
 };
 module.exports = merge(commonConfig, devConfig);
