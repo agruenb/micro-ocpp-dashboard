@@ -95,10 +95,10 @@ export default function ControlCenter(props){
                             <IDownload />
                             Fetch All
                         </button>
-                        <button class="button is-tertiary pad-icon">
+                        {/* <button class="button is-tertiary pad-icon">
                             <IDatabase />
                             Recover from localstorage
-                        </button>
+                        </button> */}
                     </div>
                 </div>
                 <WebsocketControlPanel autofetch={fetchAll} />

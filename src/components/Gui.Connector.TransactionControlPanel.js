@@ -156,7 +156,7 @@ export default function TransactionControlPanel(props){
                                 }
                                 Update Transaction
                             </button>
-                            <button class="button is-tertiary pad-icon" type="button" onClick={()=>duplicateAllValues()}>
+                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>duplicateAllValues()}>
                                 <ICopy />
                                 Insert Tag ID
                             </button>

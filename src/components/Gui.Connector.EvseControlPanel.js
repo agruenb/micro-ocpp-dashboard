@@ -169,7 +169,7 @@ export default function EvseControlPanel(props) {
                                 }
                                 Update Evse
                             </button>
-                            <button class="button is-tertiary pad-icon" type="button" onClick={() => duplicateAllValues()}>
+                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={() => duplicateAllValues()}>
                                 <ICopy />
                                 Insert all values
                             </button>

@@ -21,6 +21,9 @@ main{
     overflow-x: hidden;
     background: var(--main-bg);
 }
+table{
+    word-break: break-word;
+}
 .app{
     width:100vw;
     height:100vh;
@@ -59,8 +62,11 @@ main{
         top:var(--header-height);
         height: calc(100vh - var(--header-height));
     }
+    fieldset{
+        padding: 32px 16px 16px 16px;
+    }
     .main-container{
-        padding: 0 20px;
+        padding: 0 10px;
         margin: 10px 0;
         background: var(--panel-bg);
         border-radius:10px;
