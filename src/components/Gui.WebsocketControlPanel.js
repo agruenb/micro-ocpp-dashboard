@@ -45,9 +45,7 @@ export default function WebsocketControlPanel(props) {
     const [_dnsUrl, _setDnsUrl] = useState("");
 
     useEffect(()=>{
-        if(props.autofetch){
-            fetchValues();
-        }
+        fetchValues();
     },
     [props.autofetch]);
 
