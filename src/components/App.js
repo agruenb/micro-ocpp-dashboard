@@ -10,6 +10,7 @@ import Header from "./Layout.Header.js";
 import DeviceInfo from "./Path.DeviceInfo.js";
 import OtherDevices from "./Path.OtherDevices.js";
 import ControlCenter from "./Path.ControlCenter.js";
+import Status from "./Path.Status.js";
 
 
 const Path = createContext()
@@ -19,7 +20,7 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            path : "controlcenter"
+            path : "status"
         }
     }
     navigation(){
@@ -48,6 +49,10 @@ export default class App extends Component {
 
     view(path){
         switch(path){
+            case "status":
+                return (
+                    <Status nav={this.navigation()} />
+                )
             case "controlcenter":
                 return (
                     <ControlCenter nav={this.navigation()} />
