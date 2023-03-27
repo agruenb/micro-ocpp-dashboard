@@ -29,7 +29,7 @@ export default function EvseLiveDisplay(props) {
     const [evPlugged, setEvPlugged] = useState(false);
     const [evReady, setEvReady] = useState(false);
     const [evseReady, setEvseReady] = useState(false);
-    const [chargePointStatus, setChargePointStatus] = useState("Available");
+    const [chargePointStatus, setChargePointStatus] = useState("Faulted");
 
     const [energy, setEnergy] = useState(-1);
     const [power, setPower] = useState(-1);
