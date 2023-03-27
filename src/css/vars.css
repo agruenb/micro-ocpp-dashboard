@@ -24,7 +24,7 @@
     --theme-color:var(--kube-theme-color);
 
     --blockquote-border:var(--kube-blockquote-border);
-    --label-color:var(--kube-label-color);
+    --label-color:#202020;
     --label-color-secondary:var(--kube-label-color-secondary);
     --body-color:var(--kube-body-color);
     --muted-color:var(--kube-muted-color);

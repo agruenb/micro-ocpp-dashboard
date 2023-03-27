@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="1.2em" width="1.2em" viewBox="0 0 512 512">
+    <path
+        d="M 126 154 Q 142 147 224 138 Q 239 136 254 138 Q 291 143 314 163 Q 325 173 334 185 Q 359 215 419 231 Q 433 235 433 235 A 54.13064766620957 54.13064766620957 0 0 1 431 340 Q 431 340 431 335 A 60.002083297165605 60.002083297165605 0 0 0 311 336 Q 311 341 296 341 L 210 342 Q 195 342 195 337 A 62.01814250685037 62.01814250685037 0 0 0 71 334 Q 71 339 71 339 A 59.65000849555959 59.65000849555959 0 0 1 48 256 Q 48 256 58 246 Q 68 235 74 221 Q 80 208 84 194 Q 90 175 102 167 Q 112 160 126 154 Z"
+        fill="transparent" stroke="currentColor" stroke-width="13" />
+    <circle cx="133" cy="337" r="41" fill="transparent" stroke="currentColor" stroke-width="13" />
+    <circle cx="371" cy="337" r="41" fill="transparent" stroke="currentColor" stroke-width="13" />
+    <path d="M 304 215 L 249 216 Q 234 216 234 201 L 234 183 Q 234 168 249 168 Q 284 169 310 203 Q 319 215 304 215 Z"
+        fill="transparent" stroke="currentColor" stroke-width="13" />
+    <path d="M 132 216 L 190 215 Q 205 215 205 200 L 204 184 Q 204 169 189 170 Q 124 173 119 201 Q 117 216 132 216 Z"
+        fill="transparent" stroke="currentColor" stroke-width="13" />
+</svg>

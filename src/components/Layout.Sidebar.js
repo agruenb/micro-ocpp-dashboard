@@ -12,6 +12,7 @@ import IServer from "./icons/IServer.svg";
 import IProcessor from "./icons/IProcessor.svg";
 import IMonitor from "./icons/IMonitor.svg";
 import IControls from "./icons/IControls.svg";
+import IPower from "./icons/IPower.svg";
 
 
 export default class Sidebar extends Component{
@@ -28,6 +29,10 @@ export default class Sidebar extends Component{
                     <div>ArduinoOcpp</div>
                 </div>
                 <div class="divider" />
+                <SidebarItem route="status" nav={props.nav}>
+                    <IPower />
+                    <span>Status</span>
+                </SidebarItem>
                 <SidebarItem route="controlcenter" nav={props.nav}>
                     <IControls />
                     <span>Control Center</span>
