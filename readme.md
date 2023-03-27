@@ -2,7 +2,7 @@
 
 This is a web-based dashboard for the Arduino OCPP library.
 
-![Screenshot](docs/img/demo_screenshot.png)
+![Screenshot](docs/img/status_page.png)
 
 ## Purpose and Achitechture
 
