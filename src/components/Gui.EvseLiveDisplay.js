@@ -26,6 +26,10 @@ export default function EvseLiveDisplay(props) {
     const [fetchingEvse, setFetchingEvse] = useState(false);
     const [fetchingMeter, setFetchingMeter] = useState(false);
 
+    const [posting, setPosting] = useState(false);
+    const [postError, setPostError] = useState("");
+    const [postSuccess, setPostSuccess] = useState("");
+
     const [evPlugged, setEvPlugged] = useState(false);
     const [evReady, setEvReady] = useState(false);
     const [evseReady, setEvseReady] = useState(false);
@@ -68,6 +72,42 @@ export default function EvseLiveDisplay(props) {
         ).finally(
             ()=>{
                 setFetchingEvse(false);
+            }
+        )
+    }
+
+    function updateEvse(_evPlugged, _evReady, _evseReady) {
+        setEvPlugged(_evPlugged);
+        setEvReady(_evReady);
+        setEvseReady(_evseReady);
+        if (posting) return;
+        setPosting(true);
+        DataService.post("/connector/" + props.connectorId + "/evse", {
+            evPlugged: _evPlugged,
+            evReady: _evReady,
+            evseReady: _evseReady
+        }).then(
+            resp => {
+                if (
+                    resp.evPlugged === evPlugged &&
+                    resp.evReady === evReady &&
+                    resp.evseReady === evseReady
+                ) {
+                    setPostSuccess(`Evse update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
+                    setPostError("");
+                } else {
+                    setPostSuccess("");
+                    setPostError("Error while confirming update - You should re-fetch the evse");
+                }
+            }
+        ).catch(
+            e => {
+                setPostSuccess("");
+                setPostError("Unable to fetch evse");
+            }
+        ).finally(
+            () => {
+                setPosting(false);
             }
         )
     }
@@ -188,7 +228,7 @@ export default function EvseLiveDisplay(props) {
                         </div>
                         <div class="is-row">
                             <div class="is-col evse-attr">
-                                <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evPlugged?`active ${_currentColor()}`:""}`} onClick={()=>{setEvPlugged(!evPlugged)}}>
+                                <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evPlugged?`active ${_currentColor()}`:""}`} onClick={()=>{updateEvse(!evPlugged, evReady, evseReady);}}>
                                     {
                                         !evPlugged && <IUnplugged />
                                     }
@@ -199,7 +239,7 @@ export default function EvseLiveDisplay(props) {
                                         {evPlugged?"Plugged":"Unplugged"}
                                     </div>
                                 </a>
-                                <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evReady?`active ${_currentColor()}`:""}`} onClick={()=>{setEvReady(!evReady)}}>
+                                <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evReady?`active ${_currentColor()}`:""}`} onClick={()=>{updateEvse(evPlugged, !evReady, evseReady);}}>
                                     <div class="fix-height">
                                         <IEv />
                                     </div>
@@ -207,7 +247,7 @@ export default function EvseLiveDisplay(props) {
                                         {evReady?"Ready":"Not Ready"}
                                     </div>
                                 </a>
-                                <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evseReady?`active ${_currentColor()}`:""}`} onClick={()=>{setEvseReady(!evseReady)}}>
+                                <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evseReady?`active ${_currentColor()}`:""}`} onClick={()=>{updateEvse(evPlugged, evReady, !evseReady);}}>
                                     <IEvseIcon />
                                     <div>
                                         {evseReady?"Ready":"Not Ready"}
