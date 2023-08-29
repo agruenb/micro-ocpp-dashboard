@@ -1,11 +1,18 @@
 import { API_ROOT, NODE_ENV } from "./constants"
 
+const WasmApi = (await import("./components/WasmApi")).WasmApi;
+
+const API_NET_LAYER = "WASM";
+
 class DataServiceClass {
     constructor(){
         this.apiRoot = API_ROOT;
     }
 
     async post(endpoint, body) {
+        if (API_NET_LAYER == "WASM") {
+            return WasmApi.call(endpoint, "POST", JSON.stringify(body));
+        } else if (API_NET_LAYER == "HTTP") {
         let options = {
             method: "POST",
             headers: {
@@ -14,13 +21,22 @@ class DataServiceClass {
             body:JSON.stringify(body)
         };
         return this.request(endpoint, options);
+        } else {
+            console.log("error: API_NET_LAYER undefined")
+        }
     }
 
     async get(endpoint) {
+        if (API_NET_LAYER == "WASM") {
+            return WasmApi.call(endpoint, "GET", "{}");
+        } else if (API_NET_LAYER == "HTTP") {
         let options = {
             method: "GET"
         };
         return this.request(endpoint, options);
+        } else {
+            console.log("error: API_NET_LAYER undefined")
+        }
     }
     
     async request(endpoint, options) {

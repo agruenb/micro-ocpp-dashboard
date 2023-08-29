@@ -26,7 +26,7 @@ export default class Sidebar extends Component{
             <aside class="sidebar">
                 <div class="sb-header">
                     <IMatthLogo></IMatthLogo>
-                    <div>ArduinoOcpp</div>
+                    <div>MicroOcpp</div>
                 </div>
                 <div class="divider" />
                 <SidebarItem route="status" nav={props.nav}>
