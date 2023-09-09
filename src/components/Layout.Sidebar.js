@@ -40,6 +40,7 @@ export default class Sidebar extends Component{
                 <SidebarItem route="evse" nav={props.nav}>
                     <IEvse />
                     <span>EVSE</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="network" nav={props.nav}>
                     <IWifi />
