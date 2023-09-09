@@ -1,6 +1,6 @@
 import createModule from "./mo_simulator_wasm.mjs";
 
-class WasmApiClass {
+class DataServiceClass {
     constructor(){
         this.created = false;
         this.initialized = false;
@@ -26,6 +26,15 @@ class WasmApiClass {
         });
     }
 
+    async post(endpoint, body) {
+        return this.call(endpoint, "POST", JSON.stringify(body));
+    }
+
+    async get(endpoint) {
+        return this.call(endpoint, "GET", "{}");
+    }
 }
 
-export const WasmApi = new WasmApiClass();
+const DataService = new DataServiceClass();
+
+export default DataService;
