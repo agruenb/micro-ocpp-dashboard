@@ -1,16 +1,19 @@
-import createModule from "./mo_simulator_for_wasm.mjs";
+import createModule from "./mo_simulator_wasm.mjs";
 
 class WasmApiClass {
     constructor(){
+        this.created = false;
         this.initialized = false;
-
-        createModule().then((Module) => {
-            this.mocpp_wasm_api_call = Module.cwrap("mocpp_wasm_api_call", "string", ["string", "string", "string"]);
-            this.initialized = true;
-        });
     }
 
     async call(endpoint, method, body) {
+        if (!this.created) {
+            this.created = true;
+            createModule().then((Module) => {
+                this.mocpp_wasm_api_call = Module.cwrap("mocpp_wasm_api_call", "string", ["string", "string", "string"]);
+                this.initialized = true;
+            });
+        }
         return new Promise((resolve,reject) => {
             var pollInitialized = () => {
                 if (this.initialized) {
