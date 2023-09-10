@@ -1,6 +1,6 @@
-# Dashboard for Arduino OCPP
+# Dashboard for MicroOcpp
 
-This is a web-based dashboard for the Arduino OCPP library.
+This is a web-based dashboard for the MicroOcpp library.
 
 ![Screenshot](docs/img/status_page.png)
 
@@ -34,7 +34,7 @@ This project uses the KubeCSS library for its default styles. Kube is also desig
 
 ## Starting development
 
-To install this project, node.js and npm (node package manager) need to be installed on your machine. You can check if those are installed in your current directory by running the commands:
+To install this project, node.js and npm need to be installed on your machine. You can check if those are installed in your current directory by running the commands:
 
 `node --version`
 
