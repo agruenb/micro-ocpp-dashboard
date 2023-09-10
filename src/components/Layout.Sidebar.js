@@ -26,7 +26,7 @@ export default class Sidebar extends Component{
             <aside class="sidebar">
                 <div class="sb-header">
                     <IMatthLogo></IMatthLogo>
-                    <div>ArduinoOcpp</div>
+                    <div>MicroOcpp</div>
                 </div>
                 <div class="divider" />
                 <SidebarItem route="status" nav={props.nav}>
@@ -40,6 +40,7 @@ export default class Sidebar extends Component{
                 <SidebarItem route="evse" nav={props.nav}>
                     <IEvse />
                     <span>EVSE</span>
+                    <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="network" nav={props.nav}>
                     <IWifi />
