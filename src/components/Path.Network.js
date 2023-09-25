@@ -18,12 +18,6 @@ export default class Network extends Component {
                     <fieldset class="is-col">
                         <legend>Wifi</legend>
                         <div class="is-row is-stack-40">
-                            <div class="is-col label is-success is-large">
-                                <WifiSignal type="success" size="28"></WifiSignal>
-                                <span class="is-outset-x-12">Local_Network_Point (Connected)</span>
-                            </div>
-                        </div>
-                        <div class="is-row is-stack-40">
                             <div class="is-col">
                                 <h6>Nearby Networks</h6>
                                 <table>
