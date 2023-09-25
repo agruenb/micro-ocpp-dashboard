@@ -46,11 +46,6 @@ export default class Sidebar extends Component{
                     <span>Network</span>
                     <span>Demo</span>
                 </SidebarItem>
-                <SidebarItem route="ocpp" nav={props.nav}>
-                    <IServer />
-                    <span>OCPP 1.6</span>
-                    <span>Demo</span>
-                </SidebarItem>
                 <SidebarItem route="security" nav={props.nav}>
                     <ILock size="24" />
                     <span>Security</span>

@@ -1,5 +1,4 @@
 import { h, Component } from "preact";
-import WifiSignal from "./Diagram.WifiSignal";
 import IWifi from "./icons/IWifi.svg";
 import FullPage from "./Layout.FullPage";
 import RefreshButton from "./Util.RefreshButton";
