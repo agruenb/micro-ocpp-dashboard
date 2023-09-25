@@ -7,7 +7,6 @@ import Network from "./Path.Network.js";
 import Security from "./Path.Security.js";
 import Ocpp from "./Path.Ocpp.js";
 import Header from "./Layout.Header.js";
-import DeviceInfo from "./Path.DeviceInfo.js";
 import OtherDevices from "./Path.OtherDevices.js";
 import ControlCenter from "./Path.ControlCenter.js";
 import Status from "./Path.Status.js";
@@ -72,10 +71,6 @@ export default class App extends Component {
             case "ocpp":
                 return (
                     <Ocpp nav={this.navigation()} />
-                )
-            case "about":
-                return (
-                    <DeviceInfo nav={this.navigation()} />
                 )
             case "other":
                 return (

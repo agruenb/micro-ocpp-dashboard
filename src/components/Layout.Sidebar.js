@@ -9,7 +9,6 @@ import ILock from "./icons/ILock.svg";
 import IArrowOut from "./icons/IArrowOut.svg";
 import IMatthLogo from "./icons/IMatthLogo.svg";
 import IServer from "./icons/IServer.svg";
-import IProcessor from "./icons/IProcessor.svg";
 import IMonitor from "./icons/IMonitor.svg";
 import IControls from "./icons/IControls.svg";
 import IPower from "./icons/IPower.svg";
@@ -55,11 +54,6 @@ export default class Sidebar extends Component{
                 <SidebarItem route="security" nav={props.nav}>
                     <ILock size="24" />
                     <span>Security</span>
-                    <span>Demo</span>
-                </SidebarItem>
-                <SidebarItem route="about" nav={props.nav}>
-                    <IProcessor />
-                    <span>Controller</span>
                     <span>Demo</span>
                 </SidebarItem>
                 <SidebarItem route="other" nav={props.nav}>
