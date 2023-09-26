@@ -40,9 +40,7 @@ export default function StationControlPanel(props) {
     const [_firmwareVersion, _setFirmwareVersion] = useState();
 
     useEffect(()=>{
-        if(props.autofetch){
-            fetchValues();
-        }
+        fetchValues();
     },
     [props.autofetch]);
 
@@ -171,24 +169,6 @@ export default function StationControlPanel(props) {
             showInputs &&
             <div>
                 <div class="is-col">
-                    <div class="is-row is-stack-20">
-                        <div class="is-col">
-                            <button class={`button space-right ${(posting)?"is-loading":"pad-icon"}`} type="button" onClick={()=>postValues()}>
-                                {
-                                    !posting && <IUpload />
-                                }
-                                Update Station
-                            </button>
-                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>clearAllValues()}>
-                                <ITrash />
-                                Clear all
-                            </button>
-                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>duplicateAllValues()}>
-                                <ICopy />
-                                Insert all values 
-                            </button>
-                        </div>
-                    </div>
                     {
                         postError != ""
                         && 
@@ -229,12 +209,30 @@ export default function StationControlPanel(props) {
                             <input type="text" placeholder="chargePointVendor" value={_chargePointVendor} onChange={e=>_setChargePointVendor(e.target.value)}/>
                         </div>
                     </div>
-                    <div class="is-row">
+                    <div class="is-row is-stack-20">
                         <div class="is-col align-center">
                             <label>Firmware Version</label>
                         </div>
                         <div class="is-col">
                             <input type="text" placeholder="firmwareVersion" value={_firmwareVersion} onChange={e=>_setFirmwareVersion(e.target.value)}/>
+                        </div>
+                    </div>
+                    <div class="is-row">
+                        <div class="is-col">
+                            <button class={`button space-right ${(posting)?"is-loading":"pad-icon"}`} type="button" onClick={()=>postValues()}>
+                                {
+                                    !posting && <IUpload />
+                                }
+                                Update Station
+                            </button>
+                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>clearAllValues()}>
+                                <ITrash />
+                                Clear all
+                            </button>
+                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>duplicateAllValues()}>
+                                <ICopy />
+                                Insert all values 
+                            </button>
                         </div>
                     </div>
                 </div>

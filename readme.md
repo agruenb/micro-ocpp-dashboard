@@ -60,7 +60,7 @@ The targeted api endpoints are defined in the "constants.js" file in the "src" f
 2. Run `npm run build` (Note: The "Css Minimizer plugin" will show a warning since it does not know that css variables exist; it works anyway)
 3. Run `npm run compress`
    
-Inside the */dist* directory there are now two new files. The *bundle.html* file contains all HTML, CSS and JavaScript required to run the dashboard. You can open it in a browser and the GUI will work just fine. The second file ist the *bundle.html.gz* file. It is the same file as *bundle.html* just gzip-compressed. Therefore it is of a MUCH smaller file size. However, the browser cannot simply open a compressed file. For a browser to open the gzip-compressed file you need to configure it correctly (see "Deploy the project").
+Inside the */dist* directory there are now two new files. The *bundle.html* file contains all HTML, CSS and JavaScript required to run the dashboard. You can open it in a browser and the GUI will work just fine. The second file ist the *bundle.html.gz* file. It is the same file as *bundle.html* just gzip-compressed. Therefore it is of a much smaller file size. However, the browser cannot simply open a compressed file. For a browser to open the gzip-compressed file you need to configure it correctly (see "Deploy the project").
 
 ## Deploy the project
 

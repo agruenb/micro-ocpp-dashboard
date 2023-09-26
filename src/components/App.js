@@ -2,13 +2,13 @@ import { h, Component, createContext  } from "preact";
 
 
 import Sidebar from "./Layout.Sidebar.js";
-import Evse from "./Path.Evse.js";
 import Network from "./Path.Network.js";
 import Security from "./Path.Security.js";
 import Header from "./Layout.Header.js";
-import OtherDevices from "./Path.OtherDevices.js";
-import ControlCenter from "./Path.ControlCenter.js";
 import Status from "./Path.Status.js";
+import Websocket16 from "./Path.Websocket16.js";
+import Station from "./Path.Station.js";
+import Connectors from "./Path.Connectors.js";
 
 
 const Path = createContext()
@@ -51,13 +51,17 @@ export default class App extends Component {
                 return (
                     <Status nav={this.navigation()} />
                 )
-            case "controlcenter":
+            case "websocket16":
                 return (
-                    <ControlCenter nav={this.navigation()} />
+                    <Websocket16 nav={this.navigation()} />
                 )
-            case "evse":
+            case "station":
                 return (
-                    <Evse nav={this.navigation()} />
+                    <Station nav={this.navigation()} />
+                )
+            case "connectors":
+                return (
+                    <Connectors nav={this.navigation()} />
                 )
             case "network":
                 return (
@@ -66,10 +70,6 @@ export default class App extends Component {
             case "security":
                 return (
                     <Security nav={this.navigation()} />
-                )
-            case "other":
-                return (
-                    <OtherDevices nav={this.navigation()} />
                 )
         }  
     }

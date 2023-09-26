@@ -191,24 +191,6 @@ export default function WebsocketControlPanel(props) {
             showInputs &&
             <div>
                 <div class="is-col">
-                    <div class="is-row is-stack-20">
-                        <div class="is-col">
-                            <button class={`button space-right ${(posting)?"is-loading":"pad-icon"}`} type="button" onClick={()=>postValues()}>
-                                {
-                                    !posting && <IUpload />
-                                }
-                                Update Websocket
-                            </button>
-                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>clearAllValues()}>
-                                <ITrash />
-                                Clear all
-                            </button>
-                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>duplicateAllValues()}>
-                                <ICopy />
-                                Insert all values 
-                            </button>
-                        </div>
-                    </div>
                     {
                     postError != ""
                     && 
@@ -273,12 +255,30 @@ export default function WebsocketControlPanel(props) {
                             <input type="number" placeholder="reconnectInterval" value={_reconnectInterval} onChange={e=>_setReconnectInterval(e.target.value)} />
                         </div>
                     </div>
-                    <div class="is-row">
+                    <div class="is-row is-stack-20">
                         <div class="is-col align-center">
                             <label>DNS URL</label>
                         </div>
                         <div class="is-col">
                             <input type="text" placeholder="dnsUrl" value={_dnsUrl} onChange={e=>_setDnsUrl(e.target.value)}/>
+                        </div>
+                    </div>
+                    <div class="is-row">
+                        <div class="is-col">
+                            <button class={`button space-right ${(posting)?"is-loading":"pad-icon"}`} type="button" onClick={()=>postValues()}>
+                                {
+                                    !posting && <IUpload />
+                                }
+                                Update Websocket
+                            </button>
+                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>clearAllValues()}>
+                                <ITrash />
+                                Clear all
+                            </button>
+                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>duplicateAllValues()}>
+                                <ICopy />
+                                Insert all values 
+                            </button>
                         </div>
                     </div>
                 </div>

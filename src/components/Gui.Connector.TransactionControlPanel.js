@@ -148,20 +148,6 @@ export default function TransactionControlPanel(props){
             showInputs &&
             <div>
                 <div class="is-col">
-                    <div class="is-row is-stack-20">
-                        <div class="is-col">
-                            <button class={`button space-right ${(posting)?"is-loading":"pad-icon"}`} type="button" onClick={()=>postValues()}>
-                                {
-                                    !posting && <IUpload />
-                                }
-                                Update Transaction
-                            </button>
-                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>duplicateAllValues()}>
-                                <ICopy />
-                                Insert Tag ID
-                            </button>
-                        </div>
-                    </div>
                     {
                         postError != ""
                         && 
@@ -178,12 +164,26 @@ export default function TransactionControlPanel(props){
                             {postSuccess}
                         </div>
                     }
-                    <div class="is-row is-stack-8">
+                    <div class="is-row is-stack-20">
                         <div class="is-col align-center">
                             <label>Tag ID</label>
                         </div>
                         <div class="is-col">
                             <input type="text" placeholder="idTag" value={_idTag} onChange={e=>_setIdTag(e.target.value)} />
+                        </div>
+                    </div>
+                    <div class="is-row is-stack-20">
+                        <div class="is-col">
+                            <button class={`button space-right ${(posting)?"is-loading":"pad-icon"}`} type="button" onClick={()=>postValues()}>
+                                {
+                                    !posting && <IUpload />
+                                }
+                                Update Transaction
+                            </button>
+                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={()=>duplicateAllValues()}>
+                                <ICopy />
+                                Insert Tag ID
+                            </button>
                         </div>
                     </div>
                 </div>

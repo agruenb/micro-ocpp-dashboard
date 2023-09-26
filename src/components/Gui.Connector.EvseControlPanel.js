@@ -161,20 +161,6 @@ export default function EvseControlPanel(props) {
             showInputs &&
             <div>
                 <div class="is-col">
-                    <div class="is-row is-stack-20">
-                        <div class="is-col">
-                            <button class={`button space-right ${(posting) ? "is-loading" : "pad-icon"}`} type="button" onClick={() => postValues()}>
-                                {
-                                    !posting && <IUpload />
-                                }
-                                Update Evse
-                            </button>
-                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={() => duplicateAllValues()}>
-                                <ICopy />
-                                Insert all values
-                            </button>
-                        </div>
-                    </div>
                     {
                         postError != ""
                         &&
@@ -221,7 +207,7 @@ export default function EvseControlPanel(props) {
                             }]} selected={_evReady} onChange={value => _setEvReady(value)} />
                         </div>
                     </div>
-                    <div class="is-row is-stack-12">
+                    <div class="is-row is-stack-20">
                         <div class="is-col align-center">
                             <label>EVSE Ready</label>
                         </div>
@@ -234,6 +220,20 @@ export default function EvseControlPanel(props) {
                                 "name": <Fragment><IForbidden />EVSE not ready</Fragment>,
                                 "value": false
                             }]} selected={_evseReady} onChange={value => _setEvseReady(value)} />
+                        </div>
+                    </div>
+                    <div class="is-row is-stack-20">
+                        <div class="is-col">
+                            <button class={`button space-right ${(posting) ? "is-loading" : "pad-icon"}`} type="button" onClick={() => postValues()}>
+                                {
+                                    !posting && <IUpload />
+                                }
+                                Update Evse
+                            </button>
+                            <button class="button is-tertiary pad-icon space-right" type="button" onClick={() => duplicateAllValues()}>
+                                <ICopy />
+                                Insert all values
+                            </button>
                         </div>
                     </div>
                 </div>

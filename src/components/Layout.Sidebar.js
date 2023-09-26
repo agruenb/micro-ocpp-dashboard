@@ -3,15 +3,13 @@ import "./component_styles/sidebar.css";
 import { h, Component } from "preact";
 
 import SidebarItem from "./Layout.SidebarItem.js";
-import IEvse from "./icons/IEvse.svg";
 import IWifi from "./icons/IWifi.svg";
 import ILock from "./icons/ILock.svg";
-import IArrowOut from "./icons/IArrowOut.svg";
 import IMatthLogo from "./icons/IMatthLogo.svg";
 import IServer from "./icons/IServer.svg";
-import IMonitor from "./icons/IMonitor.svg";
 import IControls from "./icons/IControls.svg";
 import IPower from "./icons/IPower.svg";
+import ILocation from "./icons/ILocation.svg"
 
 
 export default class Sidebar extends Component{
@@ -29,18 +27,22 @@ export default class Sidebar extends Component{
                 </div>
                 <div class="divider" />
                 <SidebarItem route="status" nav={props.nav}>
-                    <IPower />
+                    <IControls />
                     <span>Status</span>
                 </SidebarItem>
-                <SidebarItem route="controlcenter" nav={props.nav}>
-                    <IControls />
-                    <span>Control Center</span>
+                <SidebarItem route="websocket16" nav={props.nav}>
+                    <IServer />
+                    <span>OCPP 1.6 Connection</span>
                 </SidebarItem>
-                <SidebarItem route="evse" nav={props.nav}>
-                    <IEvse />
-                    <span>EVSE</span>
-                    <span>Demo</span>
+                <SidebarItem route="station" nav={props.nav}>
+                    <ILocation />
+                    <span>Station</span>
                 </SidebarItem>
+                <SidebarItem route="connectors" nav={props.nav}>
+                    <IPower />
+                    <span>Connectors</span>
+                </SidebarItem>
+                <div class="divider" />
                 <SidebarItem route="network" nav={props.nav}>
                     <IWifi />
                     <span>Network</span>
@@ -50,16 +52,6 @@ export default class Sidebar extends Component{
                     <ILock size="24" />
                     <span>Security</span>
                     <span>Demo</span>
-                </SidebarItem>
-                <SidebarItem route="other" nav={props.nav}>
-                    <IMonitor />
-                    <span>Devices</span>
-                    <span>Demo</span>
-                </SidebarItem>
-                <div class="divider" />
-                <SidebarItem route="logout" nav={props.nav}>
-                    <IArrowOut/>
-                    <span>Logout</span>
                 </SidebarItem>
             </aside>
         )
