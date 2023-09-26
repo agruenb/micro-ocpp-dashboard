@@ -6,7 +6,7 @@ This is a web-based dashboard for the MicroOcpp library.
 
 ## Purpose and Achitechture
 
-This dashboard is designed to be hosted on a microcontroller. With this requirement in mind some important restrictions have to be acknowledged.
+This dashboard is a web-based interactive dashboard for the MicroOcpp library. It is designed with the ability in mind to be hosted on a microcontroller. With this requirement in mind some important restrictions have to be acknowledged.
 These are:
 
 1. Limited storage space
