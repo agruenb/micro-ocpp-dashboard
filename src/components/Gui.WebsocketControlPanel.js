@@ -170,7 +170,7 @@ export default function WebsocketControlPanel(props) {
             HtmlBuilder.simpleTable([
                 ["Backend URL", <b>{backendUrl}</b>],
                 ["Chargebox ID", <b>{chargeBoxId}</b>],
-                ["Authoriztion Key", <b>{authorizationKey}</b>],
+                ["Authorization Key", <b>{authorizationKey}</b>],
                 ["CA Certificate", <b>{caCert}</b>],
                 ["Ping Interval", <b>{pingInterval}</b>],
                 ["Reconnect Interval", <b>{reconnectInterval}</b>],
@@ -225,7 +225,7 @@ export default function WebsocketControlPanel(props) {
                     </div>
                     <div class="is-row is-stack-8">
                         <div class="is-col align-center">
-                            <label>Authoriztion Key</label>
+                            <label>Authorization Key</label>
                         </div>
                         <div class="is-col">
                             <input type="text" placeholder="authorizationKey" value={_authorizationKey} onChange={e=>_setAuthorizationKey(e.target.value)} />
