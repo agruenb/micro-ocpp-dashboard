@@ -4,7 +4,7 @@ This is a web-based dashboard for the MicroOcpp library.
 
 ![Screenshot](docs/img/status_page.png)
 
-## Purpose and Achitechture
+## Purpose and Architecture
 
 This dashboard is a web-based interactive dashboard for the MicroOcpp library. It is designed with the ability in mind to be hosted on a microcontroller. With this requirement in mind some important restrictions have to be acknowledged.
 These are:
@@ -17,20 +17,20 @@ To overcome these limitations a few key technologies are used in this project fo
 
 ### Preact
 
-Preact is a Web-UI-Framework that aims to have a particularly small bundle size. The syntax is very closly resembling React, so if you know
+Preact is a Web-UI-Framework that aims to have a particularly small bundle size. The syntax is very closely resembling React, so if you know
 React you should feel right at home. But beware, some React features are not implemented and not all libraries are compatible. For
 more information see Preact's website: [(https://preactjs.com/)](https://preactjs.com/).
 
 ### Compression
 
-The greatest reduction in storage space is achived during the final compression of the project using g-zip. The dashboard
-is deployed as a single g-ziped file without dependencies. This also allows a very simple design on the server side. For more information on the compression process see Section [Build the project](#build-the-project).
+The greatest reduction in storage space is achieved during the final compression of the project using g-zip. The dashboard
+is deployed as a single g-zipped file without dependencies. This also allows a very simple design on the server side. For more information on the compression process see Section [Build the project](#build-the-project).
 
 To be able to bundle everything into a single file all assets (images, external data/text) have to be embedded in the HTML. The [SVGR](https://react-svgr.com/docs/webpack/) library is used to convert SVG images into React components (compatible with Preact). This means that SVG images are treated as components, not assets, in the directory structure. This also means that **no assets should be placed in the public folder and that currently the only supported image type is SVG**.
 
 ### Kube CSS
 
-This project uses the KubeCSS library for its default styles. Kube is also designed to have a small bundle size and in my opinion it looks really nice :) Unfortunatly the KubeCSS website is not available anymore, but you can find it on [GitHub](https://github.com/imperavi/kube). To get an overview of supported styles there is a *class_showcase.html* file in the public folder which displays most KubeCSS styles if you visit */class_showcase.html* on the development server. This file will not be bundled in the production build.
+This project uses the KubeCSS library for its default styles. Kube is also designed to have a small bundle size and in my opinion it looks really nice :) Unfortunately the KubeCSS website is not available anymore, but you can find it on [GitHub](https://github.com/imperavi/kube). To get an overview of supported styles there is a *class_showcase.html* file in the public folder which displays most KubeCSS styles if you visit */class_showcase.html* on the development server. This file will not be bundled in the production build.
 
 ## Starting development
 
@@ -42,7 +42,7 @@ To install this project, node.js and npm need to be installed on your machine. Y
 
 Then you should:
 
-1. Clone the repositiory
+1. Clone the repository
 2. Enter the root directory
 3. Run `npm install`
 4. Run `npm run dev`
