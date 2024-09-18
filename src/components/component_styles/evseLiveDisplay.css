@@ -29,15 +29,16 @@
     padding:10px;
     background:rgba(255, 255, 255, 0.6);
     text-decoration: none;
+    white-space: nowrap;
+    flex: 1 0 18%;
+    min-width: 100px;
+    max-width: 200px;
 }
 .evse-live .status-attr:active{
     background:rgba(213, 213, 213, 0.6);
 }
 .evse-live .status-attr:first-child{
     margin-left:0;
-}
-.evse-live .status-attr.active{
-    font-weight: bold;
 }
 .evse-live a.status-attr .fix-height{
     height: 40.5px;
