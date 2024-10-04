@@ -4,6 +4,7 @@ import "./component_styles/evseLiveDisplay.css";
 
 import { useEffect, useState } from "preact/hooks";
 import DataService from "../DataService";
+import DateFormatter from "../DateFormatter";
 
 import ICross from "./icons/ICross.svg";
 import ICheckCircle from "./icons/ICheckCircle.svg";
@@ -67,7 +68,7 @@ export default function EvseLiveDisplay(props) {
             }
         ).catch(
             e => {
-                setEvseError("Evse Network Error");
+                setEvseError("EVSE Network Error");
             }
         ).finally(
             ()=>{
@@ -77,9 +78,6 @@ export default function EvseLiveDisplay(props) {
     }
 
     function updateEvse(_evPlugged, _evReady, _evseReady) {
-        setEvPlugged(_evPlugged);
-        setEvReady(_evReady);
-        setEvseReady(_evseReady);
         if (posting) return;
         setPosting(true);
         DataService.post("/connector/" + props.connectorId + "/evse", {
@@ -89,21 +87,24 @@ export default function EvseLiveDisplay(props) {
         }).then(
             resp => {
                 if (
-                    resp.evPlugged === evPlugged &&
-                    resp.evReady === evReady &&
-                    resp.evseReady === evseReady
+                    resp.evPlugged === _evPlugged &&
+                    resp.evReady === _evReady &&
+                    resp.evseReady === _evseReady
                 ) {
-                    setPostSuccess(`Evse update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
+                    setEvPlugged(_evPlugged);
+                    setEvReady(_evReady);
+                    setEvseReady(_evseReady);
+                    setPostSuccess(`EVSE update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
                     setPostError("");
                 } else {
                     setPostSuccess("");
-                    setPostError("Error while confirming update - You should re-fetch the evse");
+                    setPostError("Error while confirming update - You should re-fetch the EVSE");
                 }
             }
         ).catch(
             e => {
                 setPostSuccess("");
-                setPostError("Unable to fetch evse");
+                setPostError("Unable to fetch EVSE");
             }
         ).finally(
             () => {
@@ -174,7 +175,7 @@ export default function EvseLiveDisplay(props) {
             }
         }
         
-        return <div class={`status-badge ${_currentColor()}`} onClick={()=>{setChargePointStatus("Charging")}}>
+        return <div class={`status-badge ${_currentColor()}`}>
             <div class="upper all-center">
                 {
                     icon()
@@ -236,7 +237,15 @@ export default function EvseLiveDisplay(props) {
                                         evPlugged && <IPlugged />
                                     }
                                     <div>
+                                        <strong>EV Plug</strong><br />
                                         {evPlugged?"Plugged":"Unplugged"}
+                                    </div>
+                                </a>
+                                <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evseReady?`active ${_currentColor()}`:""}`} onClick={()=>{updateEvse(evPlugged, evReady, !evseReady);}}>
+                                    <IEvseIcon />
+                                    <div>
+                                        <strong>EVSE Ready</strong><br />
+                                        {evseReady?"Ready":"Not Ready"}
                                     </div>
                                 </a>
                                 <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evReady?`active ${_currentColor()}`:""}`} onClick={()=>{updateEvse(evPlugged, !evReady, evseReady);}}>
@@ -244,17 +253,18 @@ export default function EvseLiveDisplay(props) {
                                         <IEv />
                                     </div>
                                     <div>
+                                        <strong>EV Ready</strong><br />
                                         {evReady?"Ready":"Not Ready"}
-                                    </div>
-                                </a>
-                                <a href="#" class={`status-attr is-border-radius all-center is-shadow-1 interact ${evseReady?`active ${_currentColor()}`:""}`} onClick={()=>{updateEvse(evPlugged, evReady, !evseReady);}}>
-                                    <IEvseIcon />
-                                    <div>
-                                        {evseReady?"Ready":"Not Ready"}
                                     </div>
                                 </a>
                             </div>
                         </div>
+                        {postError !== "" && <div class="alert is-error">
+                            <IForbidden /> {postError}
+                        </div>}
+                        {postSuccess !== "" && <div class="alert is-success">
+                            <ICheckCircle /> {postSuccess}
+                        </div>}
                     </div>
                     <div class="is-col meter-values">
                         <div class="label all-center">
@@ -268,12 +278,12 @@ export default function EvseLiveDisplay(props) {
                         </div>
                         <div class="label all-center">
                             Current<br/>
-                            {current} A
+                            {Number(current).toFixed(2)} A
 
                         </div>
                         <div class="label all-center">
                             Voltage<br/>
-                            {voltage} V
+                            {Number(voltage).toFixed(2)} V
                         </div>
                     </div>
                 </div>
