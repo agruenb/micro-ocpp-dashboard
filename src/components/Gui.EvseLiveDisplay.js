@@ -78,6 +78,9 @@ export default function EvseLiveDisplay(props) {
     }
 
     function updateEvse(_evPlugged, _evReady, _evseReady) {
+        setEvPlugged(_evPlugged);
+        setEvReady(_evReady);
+        setEvseReady(_evseReady);
         if (posting) return;
         setPosting(true);
         DataService.post("/connector/" + props.connectorId + "/evse", {
@@ -87,24 +90,21 @@ export default function EvseLiveDisplay(props) {
         }).then(
             resp => {
                 if (
-                    resp.evPlugged === _evPlugged &&
-                    resp.evReady === _evReady &&
-                    resp.evseReady === _evseReady
+                    resp.evPlugged === evPlugged &&
+                    resp.evReady === evReady &&
+                    resp.evseReady === evseReady
                 ) {
-                    setEvPlugged(_evPlugged);
-                    setEvReady(_evReady);
-                    setEvseReady(_evseReady);
-                    setPostSuccess(`EVSE update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
+                    setPostSuccess(`Evse update confirmed by the server - ${DateFormatter.fullDate(new Date())}`);
                     setPostError("");
                 } else {
                     setPostSuccess("");
-                    setPostError("Error while confirming update - You should re-fetch the EVSE");
+                    setPostError("Error while confirming update - You should re-fetch the evse");
                 }
             }
         ).catch(
             e => {
                 setPostSuccess("");
-                setPostError("Unable to fetch EVSE");
+                setPostError("Unable to fetch evse");
             }
         ).finally(
             () => {
@@ -259,12 +259,6 @@ export default function EvseLiveDisplay(props) {
                                 </a>
                             </div>
                         </div>
-                        {postError !== "" && <div class="alert is-error">
-                            <IForbidden /> {postError}
-                        </div>}
-                        {postSuccess !== "" && <div class="alert is-success">
-                            <ICheckCircle /> {postSuccess}
-                        </div>}
                     </div>
                     <div class="is-col meter-values">
                         <div class="label all-center">
