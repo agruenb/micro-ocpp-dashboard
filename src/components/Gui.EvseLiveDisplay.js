@@ -141,7 +141,6 @@ export default function EvseLiveDisplay(props) {
             case "Preparing":
                 return "green";
             case "Charging":
-            case "SuspendedEV":
                 return "blue";
             default:
                 return "red";
@@ -153,7 +152,6 @@ export default function EvseLiveDisplay(props) {
             case "Preparing":
                 return "bg-gradient-green";
             case "Charging":
-            case "SuspendedEV":
                 return "bg-gradient-blue";
             default:
                 return "bg-gradient-red";
@@ -168,7 +166,6 @@ export default function EvseLiveDisplay(props) {
                 case "Preparing":
                     return <IClock />
                 case "Charging":
-                case "SuspendedEV":
                     return <ICirclePlus />
                 default:
                     return <IForbidden />
